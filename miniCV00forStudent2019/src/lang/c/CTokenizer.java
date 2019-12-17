@@ -59,45 +59,60 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 //		System.out.println("Token='" + currentTk.toString());
 		return currentTk;
 	}
+
+	enum State {
+		INIT,
+		EOF,
+		ILL,
+		DEC,
+		PLUS,
+		MINUS
+	}
+
 	private CToken readToken() {
 		CToken tk = null;
 		char ch;
 		int  startCol = colNo;
-		StringBuffer text = new StringBuffer();
+		StringBuilder text = new StringBuilder();
 
-		int state = 0;
+		State state = State.INIT;
 		boolean accept = false;
 		while (!accept) {
 			switch (state) {
-			case 0:					// 初期状態
+			case INIT:					// 初期状態
 				ch = readChar();
 				if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
+					/* 空白を読み飛ばす */
 				} else if (ch == (char) -1) {	// EOF
 					startCol = colNo - 1;
-					state = 1;
+					state = State.EOF;
 				} else if (ch >= '0' && ch <= '9') {
 					startCol = colNo - 1;
 					text.append(ch);
-					state = 3;
+					state = State.DEC;
 				} else if (ch == '+') {
 					startCol = colNo - 1;
 					text.append(ch);
-					state = 4;
+					state = State.PLUS;
+				} else if (ch == '-') {
+					startCol = colNo - 1;
+					text.append(ch);
+					state = State.MINUS;
 				} else {			// ヘンな文字を読んだ
 					startCol = colNo - 1;
 					text.append(ch);
-					state = 2;
+					state = State.ILL;
 				}
 				break;
-			case 1:					// EOFを読んだ
+			case EOF:					// EOFを読んだ
 				tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 				accept = true;
 				break;
-			case 2:					// ヘンな文字を読んだ
+			case ILL:					// ヘンな文字を読んだ
 				tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
 				accept = true;
 				break;
-			case 3:					// 数（10進数）の開始
+			case DEC:					// 数（10進数）の開始
 				ch = readChar();
 				if (Character.isDigit(ch)) {
 					text.append(ch);
@@ -108,8 +123,12 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					accept = true;
 				}
 				break;
-			case 4:					// +を読んだ
+			case PLUS:					// +を読んだ
 				tk = new CToken(CToken.TK_PLUS, lineNo, startCol, "+");
+				accept = true;
+				break;
+			case MINUS:
+				tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 				accept = true;
 				break;
 			}
