@@ -36,7 +36,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		}
 		++colNo;
 		if (ch == '\n')  { colNo = 1; ++lineNo; }
-//		System.out.print("'"+ch+"'("+(int)ch+")");
+		//System.err.print("'"+ch+"'("+(int)ch+")");
 		return ch;
 	}
 	private void backChar(char c) {
@@ -66,7 +66,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		ILL,
 		DEC,
 		PLUS,
-		MINUS
+		MINUS,
+		SLASH,
+		LCOM,
+		BCOM,
+		BCOM_MAYBE_END,
 	}
 
 	private CToken readToken() {
@@ -78,6 +82,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		State state = State.INIT;
 		boolean accept = false;
 		while (!accept) {
+			System.err.println("Current State : " + state);
 			switch (state) {
 			case INIT:					// 初期状態
 				ch = readChar();
@@ -98,6 +103,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					startCol = colNo - 1;
 					text.append(ch);
 					state = State.MINUS;
+				} else if (ch == '/') {
+					startCol = colNo - 1;
+					text.append(ch);
+					state = State.SLASH;
 				} else {			// ヘンな文字を読んだ
 					startCol = colNo - 1;
 					text.append(ch);
@@ -131,8 +140,62 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 				accept = true;
 				break;
+			case SLASH:
+				ch = readChar();
+				switch (ch) {
+					case '/': // ラインコメント
+						state = State.LCOM;
+						text.append(ch);
+						break;
+					case '*': // ブロックコメント
+						state = State.BCOM;
+						text.append(ch);
+						break;
+					default:
+						backChar(ch);
+						state = State.ILL;
+						break;
+				}
+				break;
+			case LCOM:
+				ch = readChar();
+				if (ch == '\n') {
+					text.delete(0, text.length()); // コメントがtextに入っているので初期化
+					state = State.INIT;
+				} else if (ch == (char)-1) {
+					text.delete(0, text.length()); // コメントがtextに入っているので初期化
+					state = State.EOF;
+				}
+				break;
+			case BCOM:
+				ch = readChar();
+				if (ch == '*') { // ブロックコメントの終わりかもしれない
+					text.append(ch);
+					state = State.BCOM_MAYBE_END;
+				} else if (ch == (char)-1) { // 終わる前にEOFを踏んだ
+					state = State.ILL;
+				}
+				break;
+			case BCOM_MAYBE_END:
+				ch = readChar();
+				switch (ch) {
+					case '/': // ブロックコメントの終わり
+						text.delete(0, text.length()); // コメントがtextに入っているので初期化
+						state = State.INIT;
+						break;
+					case (char)-1: // 終わる前にEOFを踏んだ
+						state = State.ILL;
+					default: // 終わりじゃなかった
+						state = State.BCOM;
+						// fall-through
+					case '*': // 終わりじゃないけどまた疑わしい
+						text.append(ch);
+						break;
+				}
+				break;
 			}
 		}
+		System.err.println("ACCEPTED");
 		return tk;
 	}
 }
