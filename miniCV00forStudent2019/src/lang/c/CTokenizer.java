@@ -64,13 +64,18 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		INIT,
 		EOF,
 		ILL,
-		DEC,
 		PLUS,
 		MINUS,
+		AMP,
 		SLASH,
 		LCOM,
 		BCOM,
 		BCOM_MAYBE_END,
+		NUM,
+		OCT,
+		HEX_BEFORE,
+		HEX,
+		DEC,
 	}
 
 	private CToken readToken() {
@@ -91,10 +96,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				} else if (ch == (char) -1) {	// EOF
 					startCol = colNo - 1;
 					state = State.EOF;
-				} else if (ch >= '0' && ch <= '9') {
+				} else if (ch >= '1' && ch <= '9') {
 					startCol = colNo - 1;
 					text.append(ch);
 					state = State.DEC;
+				} else if (ch == '0') {
+					startCol = colNo - 1;
+					text.append(ch);
+					state = State.NUM;
 				} else if (ch == '+') {
 					startCol = colNo - 1;
 					text.append(ch);
@@ -103,6 +112,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					startCol = colNo - 1;
 					text.append(ch);
 					state = State.MINUS;
+				} else if (ch == '&') {
+					startCol = colNo - 1;
+					text.append(ch);
+					state = State.AMP;
 				} else if (ch == '/') {
 					startCol = colNo - 1;
 					text.append(ch);
@@ -121,23 +134,16 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
 				accept = true;
 				break;
-			case DEC:					// 数（10進数）の開始
-				ch = readChar();
-				if (Character.isDigit(ch)) {
-					text.append(ch);
-				} else {
-					// 数の終わり
-					backChar(ch);	// 数を表さない文字は戻す（読まなかったことにする）
-					tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
-					accept = true;
-				}
-				break;
 			case PLUS:					// +を読んだ
 				tk = new CToken(CToken.TK_PLUS, lineNo, startCol, "+");
 				accept = true;
 				break;
 			case MINUS:
 				tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
+				accept = true;
+				break;
+			case AMP:
+				tk = new CToken(CToken.TK_AMP, lineNo, startCol, "&");
 				accept = true;
 				break;
 			case SLASH:
@@ -152,7 +158,6 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						text.append(ch);
 						break;
 					default:
-						backChar(ch);
 						state = State.ILL;
 						break;
 				}
@@ -169,8 +174,8 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				break;
 			case BCOM:
 				ch = readChar();
+				text.append(ch);
 				if (ch == '*') { // ブロックコメントの終わりかもしれない
-					text.append(ch);
 					state = State.BCOM_MAYBE_END;
 				} else if (ch == (char)-1) { // 終わる前にEOFを踏んだ
 					state = State.ILL;
@@ -193,7 +198,85 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						break;
 				}
 				break;
+			case NUM:
+				ch = readChar();
+				if (ch >= '0' && ch <= '9') {
+					text.append(ch);
+					state = State.OCT;
+				} else if (ch == 'x' || ch == 'X') {
+					text.append(ch);
+					state = State.HEX_BEFORE;
+				} else { // 0単体ならここで切る
+					backChar(ch);
+					tk = new CToken(CToken.TK_NUM, lineNo, startCol, "0");
+					accept = true;
+				}
+				break;
+			case HEX_BEFORE:
+				ch = readChar();
+				text.append(ch);
+				if (ch >= '0' && ch <= '9') {
+					state = State.HEX;
+				} else {
+					char c = Character.toLowerCase(ch);
+					if (c >= 'a' && c <= 'f') {
+						state = State.HEX;
+					} else {
+						state = State.ILL;
+					}
+				}
+				break;
+			case OCT:
+				ch = readChar();
+				if (ch >= '0' && ch <= '7') {
+					text.append(ch);
+				} else {
+					// 数の終わり
+					backChar(ch);	// 数を表さない文字は戻す（読まなかったことにする）
+					int n = Integer.decode(text.toString());
+					if (n > 0xFFFF) {
+						state = State.ILL;
+					} else {
+						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						accept = true;
+					}
+				}
+				break;
+			case HEX:
+				ch = readChar();
+				char c = Character.toLowerCase(ch);
+				if ((ch >= '0' && ch <= '9') || (c >= 'a' && c <= 'f')) {
+					text.append(ch);
+				} else {
+					// 数の終わり
+					backChar(ch);	// 数を表さない文字は戻す（読まなかったことにする）
+					int n = Integer.decode(text.toString());
+					if (n > 0xFFFF) {
+						state = State.ILL;
+					} else {
+						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						accept = true;
+					}
+				}
+				break;
+			case DEC:
+				ch = readChar();
+				if (ch >= '0' && ch <= '9') {
+					text.append(ch);
+				} else {
+					// 数の終わり
+					backChar(ch);	// 数を表さない文字は戻す（読まなかったことにする）
+					int n = Integer.decode(text.toString());
+					if (n > 0xFFFF) {
+						state = State.ILL;
+					} else {
+						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						accept = true;
+					}
+				}
+				break;
 			}
+
 		}
 		System.err.println("ACCEPTED");
 		return tk;

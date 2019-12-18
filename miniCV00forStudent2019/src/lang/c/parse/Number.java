@@ -14,6 +14,7 @@ public class Number extends CParseRule {
 		return tk.getType() == CToken.TK_NUM;
 	}
 	public void parse(CParseContext pcx) throws FatalErrorException {
+		System.err.println("NUM");
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 		num = tk;

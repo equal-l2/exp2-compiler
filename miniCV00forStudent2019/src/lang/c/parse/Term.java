@@ -15,6 +15,7 @@ public class Term extends CParseRule {
 	}
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
+		System.err.println("TERM");
 		factor = new Factor(pcx);
 		factor.parse(pcx);
 	}

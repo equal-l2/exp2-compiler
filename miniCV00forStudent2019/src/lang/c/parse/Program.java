@@ -15,6 +15,7 @@ public class Program extends CParseRule {
 	}
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
+		System.err.println("PROGRAM");
 		program = new Expression(pcx);
 		program.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();

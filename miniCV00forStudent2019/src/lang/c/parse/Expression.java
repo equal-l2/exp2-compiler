@@ -16,11 +16,12 @@ public class Expression extends CParseRule {
 	}
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		CParseRule term = null, list = null;
-		term = new Term(pcx);
+		System.err.println("EXPR");
+		CParseRule term = new Term(pcx);
 		term.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
+		CParseRule list = null;
 		while (true) {
 			if (ExpressionAdd.isFirst(tk)) {
 				list = new ExpressionAdd(pcx, term);
@@ -79,9 +80,10 @@ class ExpressionAdd extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 足し算の型計算規則
 		final int[][] s = {
-		//		T_err			T_int
-			{	CType.T_err,	CType.T_err },	// T_err
-			{	CType.T_err,	CType.T_int },	// T_int
+		//		T_err			T_int			T_pint	(右辺)
+			{	CType.T_err,	CType.T_err,	CType.T_err},	// T_err
+			{	CType.T_err,	CType.T_int,	CType.T_err},	// T_int
+			{	CType.T_err,	CType.T_pint,	CType.T_err},	// T_pint
 		};
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
@@ -137,9 +139,10 @@ class ExpressionSub extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 引き算の型計算規則
 		final int[][] s = {
-				//		T_err			T_int
-				{	CType.T_err,	CType.T_err },	// T_err
-				{	CType.T_err,	CType.T_int },	// T_int
+				//		T_err			T_int			T_pint	(右辺)
+				{	CType.T_err,	CType.T_err,	CType.T_err},	// T_err
+				{	CType.T_err,	CType.T_int,	CType.T_err},	// T_int
+				{	CType.T_err,	CType.T_pint,	CType.T_int},	// T_pint
 		};
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
