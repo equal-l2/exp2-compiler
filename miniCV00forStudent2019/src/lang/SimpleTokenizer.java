@@ -1,15 +1,18 @@
 package lang;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> {
-	private int		lineNo, colNo;
-	private char		backCh;
-	private boolean		backChExist = false;
-	private boolean		caseSensitive = false;
+	private int lineNo, colNo;
+	private char backCh;
+	private boolean backChExist = false;
+	private boolean caseSensitive = false;
 
 	public SimpleTokenizer() {
-		lineNo = 1; colNo = 0;
+		lineNo = 1;
+		colNo = 0;
 		setupCharSet();
 	}
 //for JUnit
@@ -23,11 +26,11 @@ public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> 
 //	}
 // end for JUnit
 
-	private final int CHAR_SPACE	= 0;
-	private final int CHAR_ALPHA	= 1;
-	private final int CHAR_NUM		= 2;
-	private final int CHAR_PUNCT	= 3;
-	private final int CHAR_COMMENT	= 4;
+	private final int CHAR_SPACE = 0;
+	private final int CHAR_ALPHA = 1;
+	private final int CHAR_NUM = 2;
+	private final int CHAR_PUNCT = 3;
+	private final int CHAR_COMMENT = 4;
 	private int[] charSet = new int[255];
 	private boolean useHexNumber = false;
 	private boolean useOctalNumber = false;
@@ -38,6 +41,7 @@ public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> 
 			charSet[s.charAt(i)] = type;
 		}
 	}
+
 	private void setupCharSet() {
 		for (int i = 0; i < charSet.length; ++i) {
 			charSet[i] = CHAR_PUNCT;
@@ -52,13 +56,35 @@ public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> 
 			charSet[c] = CHAR_NUM;
 		}
 	}
-	public void setSpaceChars(String s)		{ setChar(s, CHAR_SPACE); }
-	public void setCommentChar(char c)		{ charSet[c] = CHAR_COMMENT; }
-	public void setAlphaChar(char c)		{ charSet[c] = CHAR_ALPHA; }
-	public void setAlphaChars(String s)		{ setChar(s, CHAR_ALPHA); }
-	public void useHexNumber(boolean b)		{ useHexNumber = b; }
-	public void useOctalNumber(boolean b)	{ useOctalNumber = b; }
-	public void caseSensitive(boolean b)	{ caseSensitive = b; }
+
+	public void setSpaceChars(String s) {
+		setChar(s, CHAR_SPACE);
+	}
+
+	public void setCommentChar(char c) {
+		charSet[c] = CHAR_COMMENT;
+	}
+
+	public void setAlphaChar(char c) {
+		charSet[c] = CHAR_ALPHA;
+	}
+
+	public void setAlphaChars(String s) {
+		setChar(s, CHAR_ALPHA);
+	}
+
+	public void useHexNumber(boolean b) {
+		useHexNumber = b;
+	}
+
+	public void useOctalNumber(boolean b) {
+		useOctalNumber = b;
+	}
+
+	public void caseSensitive(boolean b) {
+		caseSensitive = b;
+	}
+
 	private InputStream in;
 	private PrintStream err;
 
@@ -79,12 +105,16 @@ public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> 
 		ch = caseSensitive ? ch : Character.toLowerCase(ch);
 		return ch;
 	}
+
 	private void backChar(char c) {
 		backCh = c;
 		backChExist = true;
 		--colNo;
-		if (c == '\n') { --lineNo; }
+		if (c == '\n') {
+			--lineNo;
+		}
 	}
+
 	public void skipToNL(SimpleParseContext pctx) {
 		in = pctx.getIOContext().getInStream();
 		err = pctx.getIOContext().getErrStream();
@@ -98,11 +128,13 @@ public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> 
 	}
 
 	private SimpleToken currentTk = null;
+
 	// 現在読み込まれているトークンを返す
 	@Override
 	public SimpleToken getCurrentToken(SimpleParseContext pcx) {
 		return currentTk;
 	}
+
 	// 次のトークンを読んで返す
 	@Override
 	public SimpleToken getNextToken(SimpleParseContext pcx) {
@@ -112,88 +144,92 @@ public class SimpleTokenizer extends Tokenizer<SimpleToken, SimpleParseContext> 
 //System.out.println("#readToken()='" + currentTk.toExplainString() + currentTk.getType());
 		return currentTk;
 	}
+
 	private SimpleToken readToken() {
 		SimpleToken tk = null;
 		char ch;
-		int  startCol;
+		int startCol;
 		StringBuffer text = new StringBuffer();
 
 		// 空白文字の読み飛ばし
 		do {
 			ch = readChar();
-			if (ch == (char) -1) { break; }		// EOF
-			if (charSet[ch] == CHAR_COMMENT) {	// コメントは行末まで読み飛ばし
+			if (ch == (char) -1) {
+				break;
+			}        // EOF
+			if (charSet[ch] == CHAR_COMMENT) {    // コメントは行末まで読み飛ばし
 				ch = readChar();
 				while (ch != '\n') {
 					ch = readChar();
 				}
 			}
 		} while (charSet[ch] == CHAR_SPACE);
-		startCol = colNo;					// この桁からトークンが始まる
+		startCol = colNo;                    // この桁からトークンが始まる
 
 		if (ch == (char) -1) { // EOF
 			tk = new SimpleToken(SimpleToken.TK_EOF, lineNo, startCol, "end_of_file");
 		} else {
 			String s;
 			switch (charSet[ch]) {
-			case CHAR_ALPHA:
-				do {
-					text.append(ch);
-					ch = readChar();
-				} while (charSet[ch] == CHAR_ALPHA || charSet[ch] == CHAR_NUM);
-				backChar(ch);
-				s = text.toString();
-				tk = new SimpleToken(SimpleToken.TK_IDENT, lineNo, startCol, s);
-				break;
-			case CHAR_NUM:
-				if (ch == '0') {
-					text.append('0');
-					ch = readChar();
-					if (useHexNumber && (ch == 'x' || ch == 'X')) {	// 16進数
-						text.append(ch);
-						ch = readChar();
-						if (charSet[ch] == CHAR_NUM || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f')) {
-							do {
-								text.append(ch);
-								ch = readChar();
-							} while (charSet[ch] == CHAR_NUM || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f'));
-							backChar(ch);
-						} else {										// 中途半端な16進数
-							backChar(ch);
-							tk = new SimpleToken(SimpleToken.TK_ILL, lineNo, startCol, text.toString());
-							break;
-						}
-					} else if (useOctalNumber) {					// 8進数
-						while (ch >= '0' && ch <= '7') {
-							text.append(ch);
-							ch = readChar();
-						}
-						backChar(ch);
-					} else {										// 10進数
-						while (charSet[ch] == CHAR_NUM) {
-							text.append(ch);
-							ch = readChar();
-						}
-						backChar(ch);
-					}
-				} else {											// 10進数
+				case CHAR_ALPHA:
 					do {
 						text.append(ch);
 						ch = readChar();
-					} while (charSet[ch] == CHAR_NUM);
+					} while (charSet[ch] == CHAR_ALPHA || charSet[ch] == CHAR_NUM);
 					backChar(ch);
-				}
-				tk = new SimpleToken(SimpleToken.TK_NUM, lineNo, startCol, text.toString());
-				break;
-			case CHAR_PUNCT:
-				text.append(ch);
-				s = text.toString();
-				tk = new SimpleToken(SimpleToken.TK_ILL, lineNo, startCol, s);
-				break;
+					s = text.toString();
+					tk = new SimpleToken(SimpleToken.TK_IDENT, lineNo, startCol, s);
+					break;
+				case CHAR_NUM:
+					if (ch == '0') {
+						text.append('0');
+						ch = readChar();
+						if (useHexNumber && (ch == 'x' || ch == 'X')) {    // 16進数
+							text.append(ch);
+							ch = readChar();
+							if (charSet[ch] == CHAR_NUM || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f')) {
+								do {
+									text.append(ch);
+									ch = readChar();
+								} while (charSet[ch] == CHAR_NUM || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f'));
+								backChar(ch);
+							} else {                                        // 中途半端な16進数
+								backChar(ch);
+								tk = new SimpleToken(SimpleToken.TK_ILL, lineNo, startCol, text.toString());
+								break;
+							}
+						} else if (useOctalNumber) {                    // 8進数
+							while (ch >= '0' && ch <= '7') {
+								text.append(ch);
+								ch = readChar();
+							}
+							backChar(ch);
+						} else {                                        // 10進数
+							while (charSet[ch] == CHAR_NUM) {
+								text.append(ch);
+								ch = readChar();
+							}
+							backChar(ch);
+						}
+					} else {                                            // 10進数
+						do {
+							text.append(ch);
+							ch = readChar();
+						} while (charSet[ch] == CHAR_NUM);
+						backChar(ch);
+					}
+					tk = new SimpleToken(SimpleToken.TK_NUM, lineNo, startCol, text.toString());
+					break;
+				case CHAR_PUNCT:
+					text.append(ch);
+					s = text.toString();
+					tk = new SimpleToken(SimpleToken.TK_ILL, lineNo, startCol, s);
+					break;
 			}
 		}
 		if (ch == '\n') {
-			++lineNo; colNo = 0;
+			++lineNo;
+			colNo = 0;
 		}
 		return tk;
 	}

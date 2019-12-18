@@ -33,14 +33,16 @@ public class FactorAmp extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		number.semanticCheck(pcx);
 		setCType(CType.getCType(CType.T_pint));
-		setConstant(number.isConstant());	// number は常に定数
+		setConstant(number.isConstant());    // number は常に定数
 	}
 
 	@Override
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; factorAmp starts");
-		if (number != null) {number.codeGen(pcx);}
+		if (number != null) {
+			number.codeGen(pcx);
+		}
 		o.println(";;; factorAmp completes");
 	}
 }

@@ -1,12 +1,17 @@
 package lang.c;
 
-import lang.*;
+import lang.FatalErrorException;
+import lang.IOContext;
 
 public class TestCToken {
 	private static class TestTokenizer extends CParseRule {
-//		program  ::= { token } EOF
-		public TestTokenizer(CParseContext pcx) {}
-		public static boolean isFirst(CToken tk) { return true; }
+		//		program  ::= { token } EOF
+		public TestTokenizer(CParseContext pcx) {
+		}
+
+		public static boolean isFirst(CToken tk) {
+			return true;
+		}
 
 		public void parse(CParseContext ctx) {
 			CToken tk = ctx.getTokenizer().getCurrentToken(ctx);
@@ -19,9 +24,11 @@ public class TestCToken {
 				tk = ctx.getTokenizer().getNextToken(ctx);
 			}
 		}
+
 		public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 			// do nothing
 		}
+
 		public void codeGen(CParseContext pcx) throws FatalErrorException {
 			// do nothing
 		}

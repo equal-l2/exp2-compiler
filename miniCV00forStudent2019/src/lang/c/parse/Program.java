@@ -1,8 +1,12 @@
 package lang.c.parse;
 
+import lang.FatalErrorException;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CTokenizer;
+
 import java.io.PrintStream;
-import lang.*;
-import lang.c.*;
 
 public class Program extends CParseRule {
 	// program ::= expression EOF
@@ -10,9 +14,11 @@ public class Program extends CParseRule {
 
 	public Program(CParseContext pcx) {
 	}
+
 	public static boolean isFirst(CToken tk) {
 		return Expression.isFirst(tk);
 	}
+
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		System.err.println("PROGRAM");
@@ -26,7 +32,9 @@ public class Program extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (program != null) { program.semanticCheck(pcx); }
+		if (program != null) {
+			program.semanticCheck(pcx);
+		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {

@@ -1,18 +1,21 @@
 package lang.c.parse;
 
-import java.io.PrintStream;
-
-import lang.*;
+import lang.FatalErrorException;
 import lang.c.*;
+
+import java.io.PrintStream;
 
 public class Number extends CParseRule {
 	// number ::= NUM
 	private CToken num;
+
 	public Number(CParseContext pcx) {
 	}
+
 	public static boolean isFirst(CToken tk) {
 		return tk.getType() == CToken.TK_NUM;
 	}
+
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		System.err.println("NUM");
 		CTokenizer ct = pcx.getTokenizer();
