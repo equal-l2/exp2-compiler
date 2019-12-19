@@ -77,6 +77,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		MINUS,
 		AMP,
 		SLASH,
+		MULT,
+		DIV,
+		LPAR,
+		RPAR,
 		LCOM,
 		BCOM,
 		BCOM_MAYBE_END,
@@ -129,6 +133,18 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = State.SLASH;
+					} else if (ch == '*') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = State.MULT;
+					} else if (ch == '(') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = State.LPAR;
+					} else if (ch == ')') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = State.RPAR;
 					} else {            // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
@@ -166,10 +182,27 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 							state = State.BCOM;
 							text.append(ch);
 							break;
-						default:
-							state = State.ILL;
+						default: // それ以外は除算と見なす
+							backChar(ch);
+							state = State.DIV;
 							break;
 					}
+					break;
+				case MULT:
+					tk = new CToken(CToken.TK_MULT, lineNo, startCol, "*");
+					accept = true;
+					break;
+				case DIV:
+					tk = new CToken(CToken.TK_DIV, lineNo, startCol, "/");
+					accept = true;
+					break;
+				case LPAR:
+					tk = new CToken(CToken.TK_LPAR, lineNo, startCol, "(");
+					accept = true;
+					break;
+				case RPAR:
+					tk = new CToken(CToken.TK_RPAR, lineNo, startCol, ")");
+					accept = true;
 					break;
 				case LCOM:
 					ch = readChar();
