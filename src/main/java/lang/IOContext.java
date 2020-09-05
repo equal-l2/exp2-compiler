@@ -35,10 +35,14 @@ public class IOContext {
 
 	private void openInput(String inputFileName) {
 		// inputFileNameをオープンしてinにつなぐ
-		try {
-			in = new FileInputStream(inputFileName);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace(err);
+		if (inputFileName.equals("-")) {
+			in = System.in;
+		} else {
+			try {
+				in = new FileInputStream(inputFileName);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace(err);
+			}
 		}
 	}
 
