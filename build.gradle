@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+defaultTasks 'MiniCompiler', 'TestCToken'
+
+task MiniCompiler(type: Jar) {
+    from sourceSets.main.output
+    manifest {
+        attributes(
+            'Main-Class': 'lang.c.MiniCompiler'
+        )
+        archiveBaseName = 'MiniCompiler'
+    }
+}
+
+task TestCToken(type: Jar) {
+    from sourceSets.main.output
+    manifest {
+        attributes(
+            'Main-Class': 'lang.c.TestCToken'
+        )
+        archiveBaseName = 'TestCToken'
+    }
+}
