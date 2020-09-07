@@ -3,20 +3,36 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/miniCV00forStudent.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/miniCV00forStudent2019/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/miniCV00forStudent2019/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +48,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1h6pzhdhcztlkQdUxfHkoKrWkgH" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
@@ -49,8 +69,29 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599341661396</updated>
-      <workItem from="1599341663139" duration="833000" />
+      <workItem from="1599341663139" duration="916000" />
+      <workItem from="1599445567251" duration="7150000" />
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599450195006">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599450195006" />
   </component>
 </project>

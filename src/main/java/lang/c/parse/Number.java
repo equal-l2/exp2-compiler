@@ -17,7 +17,6 @@ public class Number extends CParseRule {
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
-		System.err.println("NUM");
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 		num = tk;
@@ -31,10 +30,6 @@ public class Number extends CParseRule {
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		o.println(";;; number starts");
-		if (num != null) {
-			o.println("\tMOV\t#" + num.getText() + ", (R6)+\t; Number: 数を積む<" + num.toExplainString() + ">");
-		}
-		o.println(";;; number completes");
+		o.println("\tMOV\t#" + num.getText() + ", (R6)+\t; Number: 数を積む<" + num.toExplainString() + ">");
 	}
 }

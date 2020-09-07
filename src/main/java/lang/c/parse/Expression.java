@@ -6,7 +6,7 @@ import lang.c.*;
 import java.io.PrintStream;
 
 public class Expression extends CParseRule {
-	// expression ::= term { expressionAdd | expressionSub}
+	// expression ::= term { expressionAdd | expressionSub }
 	private CParseRule expression;
 
 	public Expression(CParseContext pcx) {
@@ -18,7 +18,6 @@ public class Expression extends CParseRule {
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		System.err.println("EXPR");
 		CParseRule term = new Term(pcx);
 		term.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
@@ -42,7 +41,7 @@ public class Expression extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (expression != null) {
 			expression.semanticCheck(pcx);
-			this.setCType(expression.getCType());        // expression の型をそのままコピー
+			this.setCType(expression.getCType());
 			this.setConstant(expression.isConstant());
 		}
 	}
@@ -85,9 +84,9 @@ class ExpressionAdd extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 足し算の型計算規則
 		final int[][] s = {
-				//T_err			T_int		T_pint	(右辺)
-				{CType.T_err, CType.T_err, CType.T_err},    // T_err
-				{CType.T_err, CType.T_int, CType.T_pint},    // T_int
+			//(右辺)   T_err         T_int         T_pint
+				{CType.T_err, CType.T_err,  CType.T_err},    // T_err
+				{CType.T_err, CType.T_int,  CType.T_pint},   // T_int
 				{CType.T_err, CType.T_pint, CType.T_err},    // T_pint
 		};
 		if (left != null && right != null) {
@@ -147,9 +146,9 @@ class ExpressionSub extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 引き算の型計算規則
 		final int[][] s = {
-				//	T_err		T_int		T_pint	(右辺)
-				{CType.T_err, CType.T_err, CType.T_err},    // T_err
-				{CType.T_err, CType.T_int, CType.T_err},    // T_int
+			//(右辺)     T_err        T_int        T_pint
+				{CType.T_err, CType.T_err,  CType.T_err},    // T_err
+				{CType.T_err, CType.T_int,  CType.T_err},    // T_int
 				{CType.T_err, CType.T_pint, CType.T_int},    // T_pint
 		};
 		if (left != null && right != null) {
