@@ -12,9 +12,6 @@ public class UnsignedFactor extends CParseRule {
 	// unsignedFactor ::= factorAmp | number | LPAR expression RPAR
 	private CParseRule factor;
 
-	public UnsignedFactor(CParseContext pcx) {
-	}
-
 	public static boolean isFirst(CToken tk) {
 		return FactorAmp.isFirst(tk) || Number.isFirst(tk) || tk.getType() == CToken.TK_LPAR;
 	}
@@ -24,15 +21,15 @@ public class UnsignedFactor extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 		if (tk.getType() == CToken.TK_LPAR) {
-			tk = ct.getNextToken(pcx);
-			factor = new Expression(pcx);
+			ct.getNextToken(pcx); // '(' を読み飛ばす
+			factor = new Expression();
 			factor.parse(pcx);
 			ct.getNextToken(pcx); // ')'を読み飛ばす
 		} else {
 			if (FactorAmp.isFirst(tk)) {
-				factor = new FactorAmp(pcx);
+				factor = new FactorAmp();
 			} else if (Number.isFirst(tk)) {
-				factor = new Number(pcx);
+				factor = new Number();
 			}
 			factor.parse(pcx);
 		}

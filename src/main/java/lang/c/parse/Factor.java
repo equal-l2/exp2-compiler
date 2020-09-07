@@ -9,8 +9,6 @@ public class Factor extends CParseRule {
 	// factor ::= plusFactor | minusFactor | unsignedFactor
 	private CParseRule factor;
 
-	public Factor(CParseContext pcx) {}
-
 	public static boolean isFirst(CToken tk) {
 		return PlusFactor.isFirst(tk) || MinusFactor.isFirst(tk) || UnsignedFactor.isFirst(tk);
 	}
@@ -20,11 +18,11 @@ public class Factor extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 		if (PlusFactor.isFirst(tk)) {
-			factor = new PlusFactor(pcx);
+			factor = new PlusFactor();
 		} else if (MinusFactor.isFirst(tk)) {
-			factor = new MinusFactor(pcx);
+			factor = new MinusFactor();
 		} else if (UnsignedFactor.isFirst(tk)) {
-			factor = new UnsignedFactor(pcx);
+			factor = new UnsignedFactor();
 		}
 		factor.parse(pcx);
 	}
@@ -47,12 +45,11 @@ class PlusFactor extends CParseRule {
 	// plusFactor ::= PLUS unsignedFactor
 	private CParseRule unsignedFactor;
 
-	public PlusFactor(CParseContext ctx) {}
 	public static boolean isFirst(CToken tk) { return tk.getType() == CToken.TK_PLUS; }
 	public void parse (CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getNextToken(pcx); // '+' を読み飛ばす
-		unsignedFactor = new UnsignedFactor(pcx);
+		ct.getNextToken(pcx); // '+' を読み飛ばす
+		unsignedFactor = new UnsignedFactor();
 		unsignedFactor.parse(pcx);
 	}
 
@@ -65,7 +62,6 @@ class PlusFactor extends CParseRule {
 	}
 
 	public void codeGen (CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
 		if (unsignedFactor != null) {
 			// unsignedFactorの値は中身のunsignedFactorと同じ
 			unsignedFactor.codeGen(pcx);
@@ -78,36 +74,32 @@ class MinusFactor extends CParseRule {
 	private CToken op;
 	private CParseRule uFactor;
 
-	public MinusFactor(CParseContext ctx) {}
 	public static boolean isFirst(CToken tk) { return tk.getType() == CToken.TK_MINUS; }
 	public void parse (CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
 		op = ct.getCurrentToken(pcx);
-		CToken tk = ct.getNextToken(pcx);
-		uFactor = new UnsignedFactor(pcx);
+		ct.getNextToken(pcx); // op を読み飛ばす
+		uFactor = new UnsignedFactor();
 		uFactor.parse(pcx);
 	}
 
 	public void semanticCheck (CParseContext pcx) throws FatalErrorException {
 		if (uFactor != null) {
+			// 単項マイナスの型規則
+			final int[] s = {
+					CType.T_err, // T_err
+					CType.T_int, // T_int
+					CType.T_err, // T_pint
+			};
+
 			uFactor.semanticCheck(pcx);
-			setCType(uFactor.getCType());
+			int t = uFactor.getCType().getType();
+			if (s[t] == CType.T_err) {
+				pcx.fatalError(op.toExplainString() + "型[" + uFactor.getCType().toString() + "]に単項マイナス演算子は適用できません");
+			}
+			setCType(CType.getCType(t));
 			setConstant(uFactor.isConstant());
 		}
-		// 単項マイナスの型規則
-		final int[] s = {
-				CType.T_err, // T_err
-				CType.T_int, // T_int
-				CType.T_err, // T_pint
-		};
-
-		uFactor.semanticCheck(pcx);
-		int t = uFactor.getCType().getType();
-		if (s[t] == CType.T_err) {
-			pcx.fatalError(op.toExplainString() + "型[" + uFactor.getCType().toString() + "]に単項マイナス演算子は適用できません");
-		}
-		this.setCType(CType.getCType(t));
-		this.setConstant(uFactor.isConstant());
 	}
 
 	public void codeGen (CParseContext pcx) throws FatalErrorException {

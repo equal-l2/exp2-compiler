@@ -6,10 +6,10 @@ public class SimpleToken extends Token {
 	public static final int TK_EOF = -1;    // （ファイルの終端記号）
 	public static final int TK_ILL = -2;    // 未定義トークン
 
-	private int type;                // 上のどのトークンか
-	private String text;                // 切り出したトークンの綴り
-	private int lineNo;                // このトークンがあった行
-	private int colNo;                // このトークンがあった桁
+	private final int type;                // 上のどのトークンか
+	private final String text;                // 切り出したトークンの綴り
+	private final int lineNo;                // このトークンがあった行
+	private final int colNo;                // このトークンがあった桁
 
 	@Override
 	public int getType() {
@@ -32,7 +32,7 @@ public class SimpleToken extends Token {
 	}
 
 	public int getIntValue() {
-		return Integer.decode(text).intValue();
+		return Integer.decode(text);
 	}
 
 	public SimpleToken(int type, int lineNo, int colNo, String s) {

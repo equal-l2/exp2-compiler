@@ -7,8 +7,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class CTokenizer extends Tokenizer<CToken, CParseContext> {
-	@SuppressWarnings("unused")
-	private CTokenRule rule;
+	private final CTokenRule rule;
 	private int lineNo, colNo;
 	private char backCh;
 	private boolean backChExist = false;
@@ -232,6 +231,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 							break;
 						case (char) -1: // 終わる前にEOFを踏んだ
 							state = State.ILL;
+							break;
 						default: // 終わりじゃなかった
 							state = State.BCOM;
 							// fall-through

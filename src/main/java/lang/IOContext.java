@@ -3,7 +3,7 @@ package lang;
 import java.io.*;
 
 public class IOContext {
-	private String inputFileName;
+	private final String inputFileName;
 	//	private String outputFileName;
 //	private String errFileName;
 	private InputStream in;

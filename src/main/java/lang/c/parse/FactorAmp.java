@@ -9,20 +9,16 @@ public class FactorAmp extends CParseRule {
 	// factorAmp ::= AMP number
 	CParseRule number;
 
-	public FactorAmp(CParseContext pcx) {
-	}
-
 	public static boolean isFirst(CToken tk) {
 		return tk.getType() == CToken.TK_AMP;
 	}
 
 	@Override
 	public void parse(CParseContext pcx) throws FatalErrorException {
-		System.err.println("FACTORAMP");
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 		if (Number.isFirst(tk)) {
-			number = new Number(pcx);
+			number = new Number();
 			number.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "&の後ろはNumberです");

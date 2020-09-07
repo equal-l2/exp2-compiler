@@ -12,17 +12,13 @@ public class Program extends CParseRule {
 	// program ::= expression EOF
 	private CParseRule program;
 
-	public Program(CParseContext pcx) {
-	}
-
 	public static boolean isFirst(CToken tk) {
 		return Expression.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		System.err.println("PROGRAM");
-		program = new Expression(pcx);
+		program = new Expression();
 		program.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Module 'exp2-compiler.main'" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -23,16 +27,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/Assembler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/Compiler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleParseContext.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleTokenizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/MiniCompiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/MiniCompiler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/TestCToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/TestCToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,9 +69,36 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="exp2-compiler [MiniCompiler TestCToken]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="MiniCompiler" />
+            <option value="TestCToken" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -70,7 +109,8 @@
       <option name="presentableId" value="Default" />
       <updated>1599341661396</updated>
       <workItem from="1599341663139" duration="916000" />
-      <workItem from="1599445567251" duration="7150000" />
+      <workItem from="1599445567251" duration="7505000" />
+      <workItem from="1599454061609" duration="2070000" />
     </task>
     <servers />
   </component>
@@ -84,14 +124,43 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599450195006">
+    <state x="370" y="161" key="#Inspections" timestamp="1599454183763">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599450195006" />
+    <state x="370" y="161" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599454183763" />
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599455831647">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599455831647" />
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599455880606">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599455880606" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1599455881282">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1599455881282" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1599455881272">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1599455881272" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1599455881261">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1599455881261" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1599455881281">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1599455881281" />
+    <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1599453903048">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1440.900@0.0.1440.900" timestamp="1599453903048" />
   </component>
 </project>

@@ -6,9 +6,6 @@ import lang.IOContext;
 public class TestCToken {
 	private static class TestTokenizer extends CParseRule {
 		//		program  ::= { token } EOF
-		public TestTokenizer(CParseContext pcx) {
-		}
-
 		public static boolean isFirst(CToken tk) {
 			return true;
 		}
@@ -43,7 +40,7 @@ public class TestCToken {
 			CTokenizer ct = pcx.getTokenizer();
 			CToken tk = ct.getNextToken(pcx);
 			if (TestTokenizer.isFirst(tk)) {
-				CParseRule program = new TestTokenizer(pcx);
+				CParseRule program = new TestTokenizer();
 				program.parse(pcx);
 				program.codeGen(pcx);
 			}

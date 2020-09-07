@@ -9,18 +9,14 @@ public class Number extends CParseRule {
 	// number ::= NUM
 	private CToken num;
 
-	public Number(CParseContext pcx) {
-	}
-
 	public static boolean isFirst(CToken tk) {
 		return tk.getType() == CToken.TK_NUM;
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
-		num = tk;
-		tk = ct.getNextToken(pcx);
+		num = ct.getCurrentToken(pcx);
+		ct.getNextToken(pcx); // トークンを進める
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

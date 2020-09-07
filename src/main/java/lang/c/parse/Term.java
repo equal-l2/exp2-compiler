@@ -9,26 +9,23 @@ public class Term extends CParseRule {
 	// term ::= factor { termMult | termDiv }
 	private CParseRule term;
 
-	public Term(CParseContext pcx) {
-	}
-
 	public static boolean isFirst(CToken tk) {
 		return Factor.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		CParseRule factor = new Factor(pcx);
+		CParseRule factor = new Factor();
 		factor.parse(pcx);
 
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
-		CParseRule list = null;
+		CParseRule list;
 		while (true) {
 			if (TermMult.isFirst(tk)) {
-				list = new TermMult(pcx, factor);
+				list = new TermMult(factor);
 			} else if (TermDiv.isFirst(tk)) {
-				list = new TermDiv(pcx, factor);
+				list = new TermDiv(factor);
 			} else {
 				break;
 			}
@@ -60,9 +57,10 @@ public class Term extends CParseRule {
 class TermMult extends CParseRule {
 	// termMult ::= '*' factor
 	private CToken op;
-	private CParseRule left, right;
+	private final CParseRule left;
+	private CParseRule right;
 
-	public TermMult(CParseContext pcx, CParseRule left) {
+	public TermMult(CParseRule left) {
 		this.left = left;
 	}
 
@@ -77,7 +75,7 @@ class TermMult extends CParseRule {
 		// *の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
 		if (Factor.isFirst(tk)) {
-			right = new Factor(pcx);
+			right = new Factor();
 			right.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "*の後ろはfactorです");
@@ -122,9 +120,10 @@ class TermMult extends CParseRule {
 class TermDiv extends CParseRule {
 	// termDiv ::= '*' factor
 	private CToken op;
-	private CParseRule left, right;
+	private final CParseRule left;
+	private CParseRule right;
 
-	public TermDiv(CParseContext pcx, CParseRule left) {
+	public TermDiv(CParseRule left) {
 		this.left = left;
 	}
 
@@ -139,7 +138,7 @@ class TermDiv extends CParseRule {
 		// /の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
 		if (Factor.isFirst(tk)) {
-			right = new Factor(pcx);
+			right = new Factor();
 			right.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "/の後ろはfactorです");

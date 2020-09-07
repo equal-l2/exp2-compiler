@@ -9,25 +9,22 @@ public class Expression extends CParseRule {
 	// expression ::= term { expressionAdd | expressionSub }
 	private CParseRule expression;
 
-	public Expression(CParseContext pcx) {
-	}
-
 	public static boolean isFirst(CToken tk) {
 		return Term.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		CParseRule term = new Term(pcx);
+		CParseRule term = new Term();
 		term.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
-		CParseRule list = null;
+		CParseRule list;
 		while (true) {
 			if (ExpressionAdd.isFirst(tk)) {
-				list = new ExpressionAdd(pcx, term);
+				list = new ExpressionAdd(term);
 			} else if (ExpressionSub.isFirst(tk)) {
-				list = new ExpressionSub(pcx, term);
+				list = new ExpressionSub(term);
 			} else {
 				break;
 			}
@@ -57,9 +54,10 @@ public class Expression extends CParseRule {
 class ExpressionAdd extends CParseRule {
 	// expressionAdd ::= '+' term
 	private CToken op;
-	private CParseRule left, right;
+	private final CParseRule left;
+	private CParseRule right;
 
-	public ExpressionAdd(CParseContext pcx, CParseRule left) {
+	public ExpressionAdd(CParseRule left) {
 		this.left = left;
 	}
 
@@ -74,7 +72,7 @@ class ExpressionAdd extends CParseRule {
 		// +の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
 		if (Term.isFirst(tk)) {
-			right = new Term(pcx);
+			right = new Term();
 			right.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "+の後ろはtermです");
@@ -119,9 +117,10 @@ class ExpressionAdd extends CParseRule {
 class ExpressionSub extends CParseRule {
 	// expressionSub ::= '-' term
 	private CToken op;
-	private CParseRule left, right;
+	private final CParseRule left;
+	private CParseRule right;
 
-	public ExpressionSub(CParseContext pcx, CParseRule left) {
+	public ExpressionSub(CParseRule left) {
 		this.left = left;
 	}
 
@@ -136,7 +135,7 @@ class ExpressionSub extends CParseRule {
 		// -の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
 		if (Term.isFirst(tk)) {
-			right = new Term(pcx);
+			right = new Term();
 			right.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "-の後ろはtermです");
