@@ -88,6 +88,9 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		HEX_BEFORE,
 		HEX,
 		DEC,
+		LBRA,
+		RBRA,
+		IDENT,
 	}
 
 	private CToken readToken() {
@@ -103,7 +106,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 			switch (state) {
 				case INIT:                    // 初期状態
 					ch = readChar();
-					if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
+					if (Character.isWhitespace(ch)) {
 						/* 空白を読み飛ばす */
 					} else if (ch == (char) -1) {    // EOF
 						startCol = colNo - 1;
@@ -144,7 +147,19 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = State.RPAR;
-					} else {            // ヘンな文字を読んだ
+					} else if (ch == '[') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = State.LBRA;
+					} else if (ch == ']') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = State.RBRA;
+					} else if (Character.isLetter(ch) || ch == '_'){
+						startCol = colNo - 1;
+						text.append(ch);
+						state = State.IDENT;
+					} else {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = State.ILL;
@@ -201,6 +216,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case RPAR:
 					tk = new CToken(CToken.TK_RPAR, lineNo, startCol, ")");
+					accept = true;
+					break;
+				case LBRA:
+					tk = new CToken(CToken.TK_LPAR, lineNo, startCol, "[");
+					accept = true;
+					break;
+				case RBRA:
+					tk = new CToken(CToken.TK_RPAR, lineNo, startCol, "]");
 					accept = true;
 					break;
 				case LCOM:
@@ -315,6 +338,16 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 							tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
 							accept = true;
 						}
+					}
+					break;
+				case IDENT:
+					ch = readChar();
+					if (Character.isLetterOrDigit(ch) || ch == '_') {
+						text.append(ch);
+					} else {
+						backChar(ch);
+						tk = new CToken(CToken.TK_IDENT, lineNo, startCol, text.toString());
+						accept = true;
 					}
 					break;
 			}
