@@ -10,15 +10,15 @@ public class TestCToken {
 			return true;
 		}
 
-		public void parse(CParseContext ctx) {
-			CToken tk = ctx.getTokenizer().getCurrentToken(ctx);
+		public void parse(CParseContext pcx) {
+			CToken tk = pcx.getTokenizer().getCurrentToken(pcx);
 			while (tk.getType() != CToken.TK_EOF) {
 				if (tk.getType() == CToken.TK_NUM) {
-					ctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getType() + " value=" + tk.getIntValue());
+					pcx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getTypeString() + " value=" + tk.getIntValue());
 				} else {
-					ctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getType());
+					pcx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getTypeString());
 				}
-				tk = ctx.getTokenizer().getNextToken(ctx);
+				tk = pcx.getTokenizer().getNextToken(pcx);
 			}
 		}
 

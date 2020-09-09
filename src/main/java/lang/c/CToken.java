@@ -16,4 +16,20 @@ public class CToken extends SimpleToken {
 	public CToken(int type, int lineNo, int colNo, String s) {
 		super(type, lineNo, colNo, s);
 	}
+
+	@Override
+	public String getTypeString() {
+		switch (type) {
+			case TK_PLUS: return "PLUS";
+			case TK_MINUS: return "MINUS";
+			case TK_AMP: return "AMP";
+			case TK_MULT: return "MULT";
+			case TK_DIV: return "DIV";
+			case TK_LPAR: return "LPAR";
+			case TK_RPAR: return "RPAR";
+			case TK_LBRA: return "LBRA";
+			case TK_RBRA: return "RBRA";
+			default: return super.getTypeString();
+		}
+	}
 }

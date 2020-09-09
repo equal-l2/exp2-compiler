@@ -20,12 +20,13 @@ public class Number extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		this.setCType(CType.getCType(CType.T_int));
-		this.setConstant(true);
+		setCType(CType.getCType(CType.T_int));
+		setConstant(true);
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		o.println("\tMOV\t#" + num.getText() + ", (R6)+\t; Number: 数を積む<" + num.toExplainString() + ">");
+		String num_str = num.getText();
+		o.println("\tMOV\t#" + num_str + ", (R6)+\t; Number: 数 " + num_str + " を積む<" + num.toExplainString() + ">");
 	}
 }

@@ -37,19 +37,15 @@ public class Term extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (term != null) {
-			term.semanticCheck(pcx);
-			this.setCType(term.getCType());
-			this.setConstant(term.isConstant());
-		}
+		term.semanticCheck(pcx);
+		setCType(term.getCType());
+		setConstant(term.isConstant());
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; term starts");
-		if (term != null) {
-			term.codeGen(pcx);
-		}
+		term.codeGen(pcx);
 		o.println(";;; term completes");
 	}
 }
@@ -84,36 +80,32 @@ class TermMult extends CParseRule {
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 引き算の型計算規則
-		final int[][] s = {
+		final int[][] rule = {
 				//(右辺)     T_err        T_int        T_pint
 				{CType.T_err, CType.T_err, CType.T_err},    // T_err
 				{CType.T_err, CType.T_int, CType.T_err},    // T_int
 				{CType.T_err, CType.T_err, CType.T_err},    // T_pint
 		};
-		if (left != null && right != null) {
-			left.semanticCheck(pcx);
-			right.semanticCheck(pcx);
-			int lt = left.getCType().getType();
-			int rt = right.getCType().getType();
-			int nt = s[lt][rt];
-			if (nt == CType.T_err) {
-				pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型[" + right.getCType().toString() + "]は乗算できません");
-			}
-			this.setCType(CType.getCType(nt));
-			this.setConstant(left.isConstant() && right.isConstant());
+		left.semanticCheck(pcx);
+		right.semanticCheck(pcx);
+		int lt = left.getCType().getType();
+		int rt = right.getCType().getType();
+		int nt = rule[lt][rt];
+		if (nt == CType.T_err) {
+			pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]と右辺の型[" + right.getCType() + "]は乗算できません");
 		}
+		setCType(CType.getCType(nt));
+		setConstant(left.isConstant() && right.isConstant());
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		if (left != null && right != null) {
-			left.codeGen(pcx);        // 左部分木のコード生成を頼む
-			right.codeGen(pcx);        // 右部分木のコード生成を頼む
+		left.codeGen(pcx);        // 左部分木のコード生成を頼む
+		right.codeGen(pcx);        // 右部分木のコード生成を頼む
 
-			// MULにはスタックに載っている値を使って計算してもらう
-			// 結果もスタックに載せてもらう
-			o.println("\tJSR\tMUL\t;");
-		}
+		// MULにはスタックに載っている値を使って計算してもらう
+		// 結果もスタックに載せてもらう
+		o.println("\tJSR\tMUL\t;");
 	}
 }
 
@@ -147,35 +139,31 @@ class TermDiv extends CParseRule {
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 引き算の型計算規則
-		final int[][] s = {
+		final int[][] rule = {
 				//(右辺)     T_err        T_int        T_pint
 				{CType.T_err, CType.T_err, CType.T_err},    // T_err
 				{CType.T_err, CType.T_int, CType.T_err},    // T_int
 				{CType.T_err, CType.T_err, CType.T_err},    // T_pint
 		};
-		if (left != null && right != null) {
-			left.semanticCheck(pcx);
-			right.semanticCheck(pcx);
-			int lt = left.getCType().getType();
-			int rt = right.getCType().getType();
-			int nt = s[lt][rt];                        // 規則による型計算
-			if (nt == CType.T_err) {
-				pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]は右辺の型[" + right.getCType().toString() + "]で除算できません");
-			}
-			this.setCType(CType.getCType(nt));
-			this.setConstant(left.isConstant() && right.isConstant());
+		left.semanticCheck(pcx);
+		right.semanticCheck(pcx);
+		int lt = left.getCType().getType();
+		int rt = right.getCType().getType();
+		int nt = rule[lt][rt];                        // 規則による型計算
+		if (nt == CType.T_err) {
+			pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]は右辺の型[" + right.getCType() + "]で除算できません");
 		}
+		setCType(CType.getCType(nt));
+		setConstant(left.isConstant() && right.isConstant());
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		if (left != null && right != null) {
-			left.codeGen(pcx);        // 左部分木のコード生成を頼む
-			right.codeGen(pcx);        // 右部分木のコード生成を頼む
+		left.codeGen(pcx);        // 左部分木のコード生成を頼む
+		right.codeGen(pcx);        // 右部分木のコード生成を頼む
 
-			// DIVにはスタックに載っている値を使って計算してもらう
-			// 結果もスタックに載せてもらう
-			o.println("\tJSR\tDIV\t;");
-		}
+		// DIVにはスタックに載っている値を使って計算してもらう
+		// 結果もスタックに載せてもらう
+		o.println("\tJSR\tDIV\t;");
 	}
 }

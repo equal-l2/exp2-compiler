@@ -28,22 +28,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/Assembler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/Compiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleParseContext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleTokenizer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/MiniCompiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/MiniCompiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/TestCToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/TestCToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,12 +40,20 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1h6pzhdhcztlkQdUxfHkoKrWkgH" />
   <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
+    <ConfirmationsSetting value="1" id="Remove" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -76,6 +68,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RunManager">
@@ -110,7 +103,7 @@
       <updated>1599341661396</updated>
       <workItem from="1599341663139" duration="916000" />
       <workItem from="1599445567251" duration="7505000" />
-      <workItem from="1599454061609" duration="2070000" />
+      <workItem from="1599454061609" duration="24342000" />
     </task>
     <servers />
   </component>
@@ -127,40 +120,57 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <confirmRemoveEmptyChangelist value="1" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="370" y="161" key="#Inspections" timestamp="1599454183763">
+    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1599687925935">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="370" y="161" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599454183763" />
+    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599687925935" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599455831647">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599455831647" />
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599455880606">
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1599690599041">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599455880606" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1599455881282">
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1599690599041" />
+    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599688134118">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1599455881282" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1599455881272">
+    <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1599688134118" />
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599690423347">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1599455881272" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1599455881261">
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599690423347" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1599695846683">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1599455881261" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1599455881281">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1599695846683" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1599695846683">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1599455881281" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1599695846683" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1599695846682">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1599695846682" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1599695846683">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1599695846683" />
+    <state x="221" y="89" key="SettingsEditor" timestamp="1599615587224">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1599615587224" />
     <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1599453903048">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1440.900@0.0.1440.900" timestamp="1599453903048" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1599690448830">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1599690448830" />
   </component>
 </project>

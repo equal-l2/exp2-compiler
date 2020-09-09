@@ -3,6 +3,8 @@ package lang;
 public abstract class Token {
 	public abstract int getType();
 
+	public abstract String getTypeString();
+
 	public abstract String getText();
 
 	public abstract int getLineNo();

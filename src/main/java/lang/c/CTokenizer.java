@@ -7,15 +7,13 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class CTokenizer extends Tokenizer<CToken, CParseContext> {
-	private final CTokenRule rule;
-	private int lineNo, colNo;
+	private int lineNo = 1, colNo = 1;
 	private char backCh;
-	private boolean backChExist = false;
+	private boolean backChExist;
+	private final CTokenRule tkRule;
 
-	public CTokenizer(CTokenRule rule) {
-		this.rule = rule;
-		lineNo = 1;
-		colNo = 1;
+	public CTokenizer(CTokenRule tkRule) {
+		this.tkRule = tkRule;
 	}
 
 	private InputStream in;
@@ -53,7 +51,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 	}
 
 	// 現在読み込まれているトークンを返す
-	private CToken currentTk = null;
+	private CToken currentTk;
 
 	public CToken getCurrentToken(CParseContext pctx) {
 		return currentTk;
@@ -68,7 +66,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		return currentTk;
 	}
 
-	enum State {
+	private enum State {
 		INIT,
 		EOF,
 		ILL,
@@ -106,6 +104,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 			switch (state) {
 				case INIT:                    // 初期状態
 					ch = readChar();
+					// TODO: refactor
 					if (Character.isWhitespace(ch)) {
 						/* 空白を読み飛ばす */
 					} else if (ch == (char) -1) {    // EOF
@@ -117,43 +116,43 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = State.DEC;
 					} else if (ch == '0') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('0');
 						state = State.NUM;
 					} else if (ch == '+') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('+');
 						state = State.PLUS;
 					} else if (ch == '-') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('-');
 						state = State.MINUS;
 					} else if (ch == '&') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('&');
 						state = State.AMP;
 					} else if (ch == '/') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('/');
 						state = State.SLASH;
 					} else if (ch == '*') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('*');
 						state = State.MULT;
 					} else if (ch == '(') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('(');
 						state = State.LPAR;
 					} else if (ch == ')') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append(')');
 						state = State.RPAR;
 					} else if (ch == '[') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append('[');
 						state = State.LBRA;
 					} else if (ch == ']') {
 						startCol = colNo - 1;
-						text.append(ch);
+						text.append(']');
 						state = State.RBRA;
 					} else if (Character.isLetter(ch) || ch == '_'){
 						startCol = colNo - 1;
@@ -219,11 +218,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					accept = true;
 					break;
 				case LBRA:
-					tk = new CToken(CToken.TK_LPAR, lineNo, startCol, "[");
+					tk = new CToken(CToken.TK_LBRA, lineNo, startCol, "[");
 					accept = true;
 					break;
 				case RBRA:
-					tk = new CToken(CToken.TK_RPAR, lineNo, startCol, "]");
+					tk = new CToken(CToken.TK_RBRA, lineNo, startCol, "]");
 					accept = true;
 					break;
 				case LCOM:

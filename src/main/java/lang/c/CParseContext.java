@@ -13,7 +13,7 @@ public class CParseContext extends ParseContext {
 		return (CTokenizer) super.getTokenizer();
 	}
 
-	private int seqNo = 0;
+	private int seqNo;
 
 	public int getSeqId() {
 		return ++seqNo;

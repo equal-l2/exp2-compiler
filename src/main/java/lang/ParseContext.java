@@ -2,14 +2,12 @@ package lang;
 
 public abstract class ParseContext {
 	// 入出力に関わるメソッド群
-	@SuppressWarnings("rawtypes")
 	public ParseContext(IOContext ioCtx, Tokenizer tknz) {
-		setIOContext(ioCtx);
-		setTokenizer(tknz);
+		this.ioCtx = ioCtx;
+		this.tknz = tknz;
 	}
 
 	private IOContext ioCtx;            // 入出力コンテキスト
-	@SuppressWarnings("rawtypes")
 	private Tokenizer tknz;            // 字句切り出しクラス
 
 	public void setIOContext(IOContext ioCtx) {
@@ -20,19 +18,17 @@ public abstract class ParseContext {
 		return ioCtx;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void setTokenizer(Tokenizer tknz) {
 		this.tknz = tknz;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public Tokenizer getTokenizer() {
 		return tknz;
 	}
 
 	// エラーの扱いに関するもの
-	private int warningNo = 0;    // 解析警告数
-	private int errorNo = 0;    // 解析エラー数
+	private int warningNo;    // 解析警告数
+	private int errorNo;    // 解析エラー数
 
 	public void errorReport() {
 		String errstr, warnstr;

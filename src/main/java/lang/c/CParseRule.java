@@ -3,7 +3,7 @@ package lang.c;
 import lang.LL1;
 import lang.ParseRule;
 
-public abstract class CParseRule extends ParseRule<CParseContext> implements lang.Compiler<CParseContext>, LL1<CToken> {
+public abstract class CParseRule implements ParseRule<CParseContext>, LL1<CToken> {
 	// この節点の（推測される）型
 	private CType ctype;
 
