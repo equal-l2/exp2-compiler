@@ -36,17 +36,11 @@ public class Primary extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		primary.semanticCheck(pcx);
 		setCType(primary.getCType());
-		setConstant(false); // TODO: constならtrue?
+		setConstant(primary.isConstant());
 	}
 
 	@Override
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
-		o.println(";;; primary starts");
 		primary.codeGen(pcx);
-		o.println("\tMOV\t-(R6), R0\t; アドレスをポップ");
-		o.println("\tMOV\t(R0), (R6)+\t; 値をスタックへ");
-		o.println(";;; primary completes");
-
 	}
 }

@@ -38,6 +38,7 @@ public class PrimaryMult extends CParseRule {
 			pcx.fatalError(op.toExplainString() + "cannot dereference " + ty);
 		}
 		setCType(CType.getCType(CType.T_int));
+		setConstant(false); // FIXME: get correct constness
 	}
 
 	@Override

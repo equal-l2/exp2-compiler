@@ -23,8 +23,8 @@ public class Ident extends CParseRule {
 
 	@Override
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		setCType(CType.getCType(CType.T_aint)); // TODO: set correct type
-		setConstant(false);
+		setCType(CType.getCType(CType.T_int)); // TODO: set correct type
+		setConstant(false); // TODO: set correct constness
 	}
 
 	@Override

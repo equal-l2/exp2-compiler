@@ -44,7 +44,7 @@ public class FactorAmp extends CParseRule {
 			pcx.fatalError("cannot take the address of " + ty);
 		}
 		setCType(CType.getCType(CType.T_pint));
-		setConstant(factorAmp.isConstant());
+		setConstant(true); // factorAmpはrvalue
 	}
 
 	@Override

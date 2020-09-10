@@ -10,11 +10,11 @@ import lang.c.parse.expression.Expression;
 import java.io.PrintStream;
 
 public class UnsignedFactor extends CParseRule {
-	// unsignedFactor ::= factorAmp | number | LPAR expression RPAR | primary
+	// unsignedFactor ::= factorAmp | number | LPAR expression RPAR | addressToValue
 	private CParseRule factor;
 
 	public static boolean isFirst(CToken tk) {
-		return FactorAmp.isFirst(tk) || Number.isFirst(tk) || tk.getType() == CToken.TK_LPAR || Primary.isFirst(tk);
+		return FactorAmp.isFirst(tk) || Number.isFirst(tk) || tk.getType() == CToken.TK_LPAR || AddressToValue.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
@@ -39,10 +39,10 @@ public class UnsignedFactor extends CParseRule {
 				factor = new FactorAmp();
 			} else if (Number.isFirst(tk)) {
 				factor = new Number();
-			} else if (Primary.isFirst(tk)) {
-				factor = new Primary();
+			} else if (AddressToValue.isFirst(tk)) {
+				factor = new AddressToValue();
 			} else {
-				pcx.fatalError(tk.toExplainString() + " expected (factorAmp | number | LPAR expression RPAR | primary)");
+				pcx.fatalError(tk.toExplainString() + " expected (factorAmp | number | LPAR expression RPAR | addressToValue)");
 			}
 			factor.parse(pcx);
 		}

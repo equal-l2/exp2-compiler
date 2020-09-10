@@ -31,7 +31,7 @@ public class CType {
 		return t == type;
 	}
 
-	public boolean isCType(CToken t) {
+	public boolean isCType(CType t) {
 		return isCType(t.getType());
 	}
 
