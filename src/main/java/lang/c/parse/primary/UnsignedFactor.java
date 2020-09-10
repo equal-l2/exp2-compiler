@@ -1,4 +1,4 @@
-package lang.c.parse;
+package lang.c.parse.primary;
 
 import lang.FatalErrorException;
 import lang.c.CParseContext;

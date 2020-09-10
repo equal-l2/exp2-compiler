@@ -1,7 +1,8 @@
-package lang.c.parse;
+package lang.c.parse.primary;
 
 import lang.FatalErrorException;
 import lang.c.*;
+import lang.c.parse.variable.Variable;
 
 import java.io.PrintStream;
 

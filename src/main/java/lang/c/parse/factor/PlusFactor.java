@@ -5,7 +5,7 @@ import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CTokenizer;
-import lang.c.parse.UnsignedFactor;
+import lang.c.parse.primary.UnsignedFactor;
 
 public class PlusFactor extends CParseRule {
 	// plusFactor ::= PLUS unsignedFactor

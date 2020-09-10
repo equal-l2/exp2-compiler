@@ -28,14 +28,17 @@
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Array.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expression/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/Term.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/variable/Array.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/FactorAmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/primary/FactorAmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Ident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/variable/Ident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/primary/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Primary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/primary/Primary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/PrimaryMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/primary/PrimaryMult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/primary/UnsignedFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/variable/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/MinusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/MinusFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +90,11 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="lang.c.parse" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="exp2-compiler [MiniCompiler TestCToken]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">

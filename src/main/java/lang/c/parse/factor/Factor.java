@@ -1,8 +1,11 @@
 package lang.c.parse.factor;
 
 import lang.FatalErrorException;
-import lang.c.*;
-import lang.c.parse.UnsignedFactor;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CTokenizer;
+import lang.c.parse.primary.UnsignedFactor;
 
 import java.io.PrintStream;
 

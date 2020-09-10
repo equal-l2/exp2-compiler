@@ -1,10 +1,11 @@
-package lang.c.parse;
+package lang.c.parse.primary;
 
 import lang.FatalErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CTokenizer;
+import lang.c.parse.variable.Variable;
 
 import java.io.PrintStream;
 
