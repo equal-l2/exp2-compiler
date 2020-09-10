@@ -27,8 +27,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +47,16 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -124,10 +142,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1599687925935">
+    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1599699553626">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599687925935" />
+    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599699553626" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599455831647">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -136,14 +154,22 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1599690599041" />
+    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599697971397">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1440.900@0.0.1440.900" timestamp="1599697971397" />
     <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599688134118">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.900@0.0.1440.900" timestamp="1599688134118" />
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599690423347">
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599698799515">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599690423347" />
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599698799515" />
+    <state x="100" y="100" width="1240" height="700" key="DiffContextDialog" timestamp="1599697423726">
+      <screen x="0" y="23" width="1440" height="805" />
+    </state>
+    <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.805@0.23.1440.805" timestamp="1599697423726" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1599695846683">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -168,9 +194,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1440.900@0.0.1440.900" timestamp="1599453903048" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1599690448830">
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1599697211709">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1599690448830" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1599697211709" />
   </component>
 </project>

@@ -19,17 +19,17 @@ public class CToken extends SimpleToken {
 
 	@Override
 	public String getTypeString() {
-		switch (type) {
-			case TK_PLUS: return "PLUS";
-			case TK_MINUS: return "MINUS";
-			case TK_AMP: return "AMP";
-			case TK_MULT: return "MULT";
-			case TK_DIV: return "DIV";
-			case TK_LPAR: return "LPAR";
-			case TK_RPAR: return "RPAR";
-			case TK_LBRA: return "LBRA";
-			case TK_RBRA: return "RBRA";
-			default: return super.getTypeString();
-		}
+		return switch (type) {
+			case TK_PLUS -> "PLUS";
+			case TK_MINUS -> "MINUS";
+			case TK_AMP -> "AMP";
+			case TK_MULT -> "MULT";
+			case TK_DIV -> "DIV";
+			case TK_LPAR -> "LPAR";
+			case TK_RPAR -> "RPAR";
+			case TK_LBRA -> "LBRA";
+			case TK_RBRA -> "RBRA";
+			default -> super.getTypeString();
+		};
 	}
 }

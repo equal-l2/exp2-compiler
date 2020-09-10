@@ -6,18 +6,45 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+enum State {
+	INIT,
+	EOF,
+	ILL,
+	PLUS,
+	MINUS,
+	AMP,
+	SLASH,
+	MULT,
+	DIV,
+	LPAR,
+	RPAR,
+	LCOM,
+	BCOM,
+	BCOM_MAYBE_END,
+	NUM,
+	OCT,
+	HEX_BEFORE,
+	HEX,
+	DEC,
+	LBRA,
+	RBRA,
+	IDENT,
+}
+
 public class CTokenizer extends Tokenizer<CToken, CParseContext> {
+	private final CTokenRule rule;
 	private int lineNo = 1, colNo = 1;
 	private char backCh;
 	private boolean backChExist;
-	private final CTokenRule tkRule;
-
-	public CTokenizer(CTokenRule tkRule) {
-		this.tkRule = tkRule;
-	}
-
 	private InputStream in;
 	private PrintStream err;
+	// 現在読み込まれているトークンを返す
+	private CToken currentTk;
+	private static final int EOF = (char)-1;
+
+	public CTokenizer(CTokenRule rule) {
+		this.rule = rule;
+	}
 
 	private char readChar() {
 		char ch;
@@ -29,7 +56,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				ch = (char) in.read();
 			} catch (IOException e) {
 				e.printStackTrace(err);
-				ch = (char) -1;
+				ch = EOF;
 			}
 		}
 		++colNo;
@@ -50,9 +77,6 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		}
 	}
 
-	// 現在読み込まれているトークンを返す
-	private CToken currentTk;
-
 	public CToken getCurrentToken(CParseContext pctx) {
 		return currentTk;
 	}
@@ -66,31 +90,6 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		return currentTk;
 	}
 
-	private enum State {
-		INIT,
-		EOF,
-		ILL,
-		PLUS,
-		MINUS,
-		AMP,
-		SLASH,
-		MULT,
-		DIV,
-		LPAR,
-		RPAR,
-		LCOM,
-		BCOM,
-		BCOM_MAYBE_END,
-		NUM,
-		OCT,
-		HEX_BEFORE,
-		HEX,
-		DEC,
-		LBRA,
-		RBRA,
-		IDENT,
-	}
-
 	private CToken readToken() {
 		CToken tk = null;
 		char ch;
@@ -102,77 +101,51 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		while (!accept) {
 			System.err.println("Current State : " + state);
 			switch (state) {
-				case INIT:                    // 初期状態
+				case INIT:
 					ch = readChar();
-					// TODO: refactor
 					if (Character.isWhitespace(ch)) {
-						/* 空白を読み飛ばす */
-					} else if (ch == (char) -1) {    // EOF
-						startCol = colNo - 1;
-						state = State.EOF;
-					} else if (ch >= '1' && ch <= '9') {
-						startCol = colNo - 1;
-						text.append(ch);
-						state = State.DEC;
-					} else if (ch == '0') {
-						startCol = colNo - 1;
-						text.append('0');
-						state = State.NUM;
-					} else if (ch == '+') {
-						startCol = colNo - 1;
-						text.append('+');
-						state = State.PLUS;
-					} else if (ch == '-') {
-						startCol = colNo - 1;
-						text.append('-');
-						state = State.MINUS;
-					} else if (ch == '&') {
-						startCol = colNo - 1;
-						text.append('&');
-						state = State.AMP;
-					} else if (ch == '/') {
-						startCol = colNo - 1;
-						text.append('/');
-						state = State.SLASH;
-					} else if (ch == '*') {
-						startCol = colNo - 1;
-						text.append('*');
-						state = State.MULT;
-					} else if (ch == '(') {
-						startCol = colNo - 1;
-						text.append('(');
-						state = State.LPAR;
-					} else if (ch == ')') {
-						startCol = colNo - 1;
-						text.append(')');
-						state = State.RPAR;
-					} else if (ch == '[') {
-						startCol = colNo - 1;
-						text.append('[');
-						state = State.LBRA;
-					} else if (ch == ']') {
-						startCol = colNo - 1;
-						text.append(']');
-						state = State.RBRA;
-					} else if (Character.isLetter(ch) || ch == '_'){
-						startCol = colNo - 1;
-						text.append(ch);
-						state = State.IDENT;
-					} else {
-						startCol = colNo - 1;
-						text.append(ch);
-						state = State.ILL;
+						// 空白を読み飛ばす
+						break;
 					}
+					startCol = colNo - 1;
+
+					if (ch == EOF) {
+						state = State.EOF;
+						break;
+					}
+					text.append(ch);
+
+					state = switch (ch) {
+						case '0' -> State.NUM;
+						case '+' -> State.PLUS;
+						case '-' -> State.MINUS;
+						case '&' -> State.AMP;
+						case '/' -> State.SLASH;
+						case '*' -> State.MULT;
+						case '(' -> State.LPAR;
+						case ')' -> State.RPAR;
+						case '[' -> State.LBRA;
+						case ']' -> State.RBRA;
+						default -> {
+							if (ch >= '1' && ch <= '9') {
+								yield State.DEC;
+							} else if (Character.isLetter(ch) || ch == '_') {
+								yield State.IDENT;
+							} else {
+								yield State.ILL;
+							}
+						}
+					};
 					break;
-				case EOF:                    // EOFを読んだ
+				case EOF:
 					tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 					accept = true;
 					break;
-				case ILL:                    // ヘンな文字を読んだ
+				case ILL:
 					tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
 					accept = true;
 					break;
-				case PLUS:                    // +を読んだ
+				case PLUS:
 					tk = new CToken(CToken.TK_PLUS, lineNo, startCol, "+");
 					accept = true;
 					break;
@@ -230,7 +203,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					if (ch == '\n') {
 						text.delete(0, text.length()); // コメントがtextに入っているので初期化
 						state = State.INIT;
-					} else if (ch == (char) -1) {
+					} else if (ch == EOF) {
 						text.delete(0, text.length()); // コメントがtextに入っているので初期化
 						state = State.EOF;
 					}
@@ -240,7 +213,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					text.append(ch);
 					if (ch == '*') { // ブロックコメントの終わりかもしれない
 						state = State.BCOM_MAYBE_END;
-					} else if (ch == (char) -1) { // 終わる前にEOFを踏んだ
+					} else if (ch == EOF) { // 終わる前にEOFを踏んだ
 						state = State.ILL;
 					}
 					break;
@@ -251,7 +224,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 							text.delete(0, text.length()); // コメントがtextに入っているので初期化
 							state = State.INIT;
 							break;
-						case (char) -1: // 終わる前にEOFを踏んだ
+						case EOF: // 終わる前にEOFを踏んだ
 							state = State.ILL;
 							break;
 						default: // 終わりじゃなかった

@@ -1,7 +1,6 @@
 package lang;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public abstract class SymbolTable<E extends SymbolTableEntry> extends HashMap<String, E> {
 	// 登録
@@ -13,8 +12,7 @@ public abstract class SymbolTable<E extends SymbolTableEntry> extends HashMap<St
 	// 全体表示
 	public void show() {
 //		System.out.println("--- Symbol Table ---");
-		for (Iterator<String> it = keySet().iterator(); it.hasNext(); ) {
-			String label = it.next();
+		for (String label : keySet()) {
 			E e = get(label);
 			if (e == null) {
 				System.out.println(label + "\t= (null) [未定義]");

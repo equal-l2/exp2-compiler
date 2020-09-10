@@ -5,7 +5,7 @@ import java.io.*;
 public class IOContext {
 	private final String inputFileName;
 	//	private String outputFileName;
-//	private String errFileName;
+	//	private String errFileName;
 	private InputStream in;
 	private PrintStream out;
 	private PrintStream err;

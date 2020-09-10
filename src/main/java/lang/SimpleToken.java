@@ -18,13 +18,13 @@ public class SimpleToken extends Token {
 
 	@Override
 	public String getTypeString() {
-		switch (type) {
-			case TK_IDENT: return "IDENT";
-			case TK_NUM: return "NUM";
-			case TK_EOF: return "EOF";
-			case TK_ILL: return "ILL";
-			default: return "Unknown";
-		}
+		return switch (type) {
+			case TK_IDENT -> "IDENT";
+			case TK_NUM -> "NUM";
+			case TK_EOF -> "EOF";
+			case TK_ILL -> "ILL";
+			default -> "Unknown";
+		};
 	}
 
 	@Override

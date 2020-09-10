@@ -26,7 +26,7 @@ public class Number extends CParseRule {
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		String num_str = num.getText();
-		o.println("\tMOV\t#" + num_str + ", (R6)+\t; Number: 数 " + num_str + " を積む<" + num.toExplainString() + ">");
+		String numStr = num.getText();
+		o.println("\tMOV\t#" + numStr + ", (R6)+\t; Number: 数 " + numStr + " を積む<" + num.toExplainString() + ">");
 	}
 }

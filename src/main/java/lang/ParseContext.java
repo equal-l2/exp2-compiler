@@ -1,5 +1,6 @@
 package lang;
 
+@SuppressWarnings("rawtypes")
 public abstract class ParseContext {
 	// 入出力に関わるメソッド群
 	public ParseContext(IOContext ioCtx, Tokenizer tknz) {

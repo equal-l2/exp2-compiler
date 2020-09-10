@@ -16,11 +16,11 @@ public class CType {
 	};
 
 	private final int type;
-	private final String string;
+	private final String typename;
 
 	private CType(int type, String s) {
 		this.type = type;
-		string = s;
+		typename = s;
 	}
 
 	public static CType getCType(int type) {
@@ -48,18 +48,11 @@ public class CType {
 	}
 
 	public CType deref() {
-		int ty;
-		switch(type){
-			case T_pint:
-			case T_aint:
-				ty = T_int;
-				break;
-			case T_apint:
-				ty = T_pint;
-				break;
-			default:
-				ty = T_err;
-		}
+		int ty = switch (type) {
+			case T_pint, T_aint -> T_int;
+			case T_apint -> T_pint;
+			default -> T_err;
+		};
 		return typeArray[ty];
 	}
 
@@ -68,6 +61,6 @@ public class CType {
 	}
 
 	public String toString() {
-		return string;
+		return typename;
 	}
 }
