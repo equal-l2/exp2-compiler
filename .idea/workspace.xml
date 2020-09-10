@@ -27,16 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SymbolTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Array.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expression/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Term.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/Term.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnsignedFactor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +153,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1599690599041" />
+    <state x="424" y="269" key="#com.intellij.refactoring.memberPullUp.PullUpDialog" timestamp="1599700297232">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="424" y="269" key="#com.intellij.refactoring.memberPullUp.PullUpDialog/0.0.1440.900@0.0.1440.900" timestamp="1599700297232" />
+    <state x="490" y="351" width="460" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1599700411187">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="490" y="351" width="460" height="205" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1440.900@0.0.1440.900" timestamp="1599700411187" />
     <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599697971397">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

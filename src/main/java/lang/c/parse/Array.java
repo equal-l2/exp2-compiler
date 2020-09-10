@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import lang.FatalErrorException;
 import lang.c.*;
+import lang.c.parse.expression.Expression;
 
 import java.io.PrintStream;
 
