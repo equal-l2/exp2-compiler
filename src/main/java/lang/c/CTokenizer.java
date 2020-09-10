@@ -29,6 +29,8 @@ enum State {
 	LBRA,
 	RBRA,
 	IDENT,
+	ASSIGN,
+	SEMI,
 }
 
 public class CTokenizer extends Tokenizer<CToken, CParseContext> {
@@ -126,6 +128,8 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						case ')' -> State.RPAR;
 						case '[' -> State.LBRA;
 						case ']' -> State.RBRA;
+						case '=' -> State.ASSIGN;
+						case ';' -> State.SEMI;
 						default -> {
 							if (ch >= '1' && ch <= '9') {
 								yield State.DEC;
@@ -196,6 +200,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case RBRA:
 					tk = new CToken(CToken.TK_RBRA, lineNo, startCol, "]");
+					accept = true;
+					break;
+				case ASSIGN:
+					tk = new CToken(CToken.TK_ASSIGN, lineNo, startCol, "=");
+					accept = true;
+					break;
+				case SEMI:
+					tk = new CToken(CToken.TK_SEMI, lineNo, startCol, ";");
 					accept = true;
 					break;
 				case LCOM:
