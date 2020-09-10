@@ -4,8 +4,7 @@ import lang.FatalErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
-import lang.c.CTokenizer;
-import lang.c.parse.primary.UnsignedFactor;
+import lang.c.parse.prim.UnsignedFactor;
 
 import java.io.PrintStream;
 
@@ -17,10 +16,9 @@ public class Factor extends CParseRule {
 		return PlusFactor.isFirst(tk) || MinusFactor.isFirst(tk) || UnsignedFactor.isFirst(tk);
 	}
 
-	public void parse(CParseContext pcx) throws FatalErrorException {
+	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+		CToken tk = pctx.getTokenizer().getCurrentToken(pctx);
 		if (PlusFactor.isFirst(tk)) {
 			factor = new PlusFactor();
 		} else if (MinusFactor.isFirst(tk)) {
@@ -28,21 +26,21 @@ public class Factor extends CParseRule {
 		} else if (UnsignedFactor.isFirst(tk)) {
 			factor = new UnsignedFactor();
 		} else {
-			pcx.fatalError(tk.toExplainString() + "expected plusFactor | minusFactor | unsignedFactor");
+			pctx.fatalError(tk.toExplainString() + "expected plusFactor | minusFactor | unsignedFactor");
 		}
-		factor.parse(pcx);
+		factor.parse(pctx);
 	}
 
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		factor.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		factor.semanticCheck(pctx);
 		setCType(factor.getCType());
 		setConstant(factor.isConstant());
 	}
 
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; factor starts");
-		factor.codeGen(pcx);
+		factor.codeGen(pctx);
 		o.println(";;; factor completes");
 	}
 }

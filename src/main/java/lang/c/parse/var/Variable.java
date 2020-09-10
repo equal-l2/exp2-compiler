@@ -1,54 +1,52 @@
-package lang.c.parse.variable;
+package lang.c.parse.var;
 
 import lang.FatalErrorException;
-import lang.c.*;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CType;
 
 import java.io.PrintStream;
 
 public class Variable extends CParseRule {
 	// variable ::= ident [ array ]
 
-	private CParseRule ident;
-	private CParseRule array;
+	private Ident ident;
+	private Array array;
 
 	public static boolean isFirst(CToken tk) {
 		return Ident.isFirst(tk);
 	}
 
 	@Override
-	public void parse(CParseContext pcx) throws FatalErrorException {
-		CTokenizer tknz = pcx.getTokenizer();
-		CToken tk = tknz.getCurrentToken(pcx);
-		if (Ident.isFirst(tk)) {
-			ident = new Ident();
-			ident.parse(pcx);
-		} else {
-			pcx.fatalError("expected ident");
-		}
+	public void parse(CParseContext pctx) throws FatalErrorException {
+		pctx.expect(Ident::isFirst, "expected ident");
+		ident = new Ident();
+		ident.parse(pctx);
 
-		tk = tknz.getCurrentToken(pcx);
+		CToken tk = pctx.getTokenizer().getCurrentToken(pctx);
 		if (Array.isFirst(tk)) {
 			array = new Array();
-			array.parse(pcx);
+			array.parse(pctx);
 		}
 	}
 
 	@Override
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		ident.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		ident.semanticCheck(pctx);
 		if (array != null) {
-			array.semanticCheck(pcx);
+			array.semanticCheck(pctx);
 			CType ty = ident.getCType();
 			if (!ty.isArray()) {
 				// NOTE: 要件によりポインタはindexできないようにしてある
-				pcx.fatalError("cannot index type " + ty);
+				pctx.fatalError("cannot index type " + ty);
 			}
 			setCType(ty.deref());
 		} else {
 			CType ty = ident.getCType();
 			if (!(ty.isCType(CType.T_int) || ty.isCType(CType.T_pint))) {
 				// NOTE: 要件により配列型変数はindexされた形でしか出現できない
-				pcx.fatalError("expected scalar types, found " + ty);
+				pctx.fatalError("expected scalar types, found " + ty);
 			}
 			setCType(ty);
 		}
@@ -56,12 +54,12 @@ public class Variable extends CParseRule {
 	}
 
 	@Override
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; variable starts");
-		ident.codeGen(pcx);
+		ident.codeGen(pctx);
 		if (array != null) {
-			array.codeGen(pcx);
+			array.codeGen(pctx);
 			o.println("\tMOV\t-(R6), R0\t; Arrayのexprの値をスタックへ");
 		} else {
 			o.println("\tMOV\t#0, R0\t; ");

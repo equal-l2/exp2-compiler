@@ -1,5 +1,7 @@
 package lang.c;
 
+import java.util.Objects;
+
 public class CType {
 	public static final int T_err   = 0; // 型エラー
 	public static final int T_int   = 1; // int
@@ -32,7 +34,7 @@ public class CType {
 	}
 
 	public boolean isCType(CType t) {
-		return isCType(t.getType());
+		return isCType(t.type);
 	}
 
 	public static boolean isArray(int t) {
@@ -41,10 +43,6 @@ public class CType {
 
 	public boolean isArray() {
 		return isArray(type);
-	}
-
-	public boolean isIndexable() {
-		return isArray() || type == T_pint;
 	}
 
 	public CType deref() {
@@ -56,11 +54,30 @@ public class CType {
 		return typeArray[ty];
 	}
 
+	public CType toArrayType() {
+		int ty = switch (type) {
+			case T_int -> T_aint;
+			case T_pint -> T_apint;
+			default -> T_err;
+		};
+		return typeArray[ty];
+	}
+
 	public int getType() {
 		return type;
 	}
 
 	public String toString() {
 		return typename;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof CType && type == ((CType) obj).type;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(type);
 	}
 }

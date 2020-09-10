@@ -1,13 +1,10 @@
-package lang.c.parse.primary;
+package lang.c.parse.prim;
 
 import lang.FatalErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
-import lang.c.CTokenizer;
-import lang.c.parse.variable.Variable;
-
-import java.io.PrintStream;
+import lang.c.parse.var.Variable;
 
 public class Primary extends CParseRule {
 	// primary ::= primaryMult | variable
@@ -19,28 +16,27 @@ public class Primary extends CParseRule {
 	}
 
 	@Override
-	public void parse(CParseContext pcx) throws FatalErrorException {
-		CTokenizer tknz = pcx.getTokenizer();
-		CToken tk = tknz.getCurrentToken(pcx);
+	public void parse(CParseContext pctx) throws FatalErrorException {
+		CToken tk = pctx.getTokenizer().getCurrentToken(pctx);
 		if (PrimaryMult.isFirst(tk)) {
 			primary = new PrimaryMult();
 		} else if (Variable.isFirst(tk)) {
 			primary = new Variable();
 		} else {
-			pcx.fatalError(tk.toExplainString() + "expected primaryMult | variable");
+			pctx.fatalError(tk.toExplainString() + "expected primaryMult | variable");
 		}
-		primary.parse(pcx);
+		primary.parse(pctx);
 	}
 
 	@Override
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		primary.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		primary.semanticCheck(pctx);
 		setCType(primary.getCType());
 		setConstant(primary.isConstant());
 	}
 
 	@Override
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		primary.codeGen(pcx);
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		primary.codeGen(pctx);
 	}
 }

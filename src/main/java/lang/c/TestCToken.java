@@ -10,23 +10,23 @@ public class TestCToken {
 			return true;
 		}
 
-		public void parse(CParseContext pcx) {
-			CToken tk = pcx.getTokenizer().getCurrentToken(pcx);
+		public void parse(CParseContext pctx) {
+			CToken tk = pctx.getTokenizer().getCurrentToken(pctx);
 			while (tk.getType() != CToken.TK_EOF) {
 				if (tk.getType() == CToken.TK_NUM) {
-					pcx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getTypeString() + " value=" + tk.getIntValue());
+					pctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getTypeString() + " value=" + tk.getIntValue());
 				} else {
-					pcx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getTypeString());
+					pctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getTypeString());
 				}
-				tk = pcx.getTokenizer().getNextToken(pcx);
+				tk = pctx.getTokenizer().getNextToken(pctx);
 			}
 		}
 
-		public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 			// do nothing
 		}
 
-		public void codeGen(CParseContext pcx) throws FatalErrorException {
+		public void codeGen(CParseContext pctx) throws FatalErrorException {
 			// do nothing
 		}
 	}

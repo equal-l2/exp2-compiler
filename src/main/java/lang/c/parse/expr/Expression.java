@@ -1,4 +1,4 @@
-package lang.c.parse.expression;
+package lang.c.parse.expr;
 
 import lang.FatalErrorException;
 import lang.c.CParseContext;
@@ -17,12 +17,13 @@ public class Expression extends CParseRule {
 		return Term.isFirst(tk);
 	}
 
-	public void parse(CParseContext pcx) throws FatalErrorException {
+	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CParseRule term = new Term();
-		term.parse(pcx);
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+		term.parse(pctx);
+
+		CTokenizer tknz = pctx.getTokenizer();
+		CToken tk = tknz.getCurrentToken(pctx);
 		CParseRule list;
 		while (true) {
 			if (ExpressionAdd.isFirst(tk)) {
@@ -32,23 +33,23 @@ public class Expression extends CParseRule {
 			} else {
 				break;
 			}
-			list.parse(pcx);
+			list.parse(pctx);
 			term = list;
-			tk = ct.getCurrentToken(pcx);
+			tk = tknz.getCurrentToken(pctx);
 		}
 		expression = term;
 	}
 
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		expression.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		expression.semanticCheck(pctx);
 		setCType(expression.getCType());
 		setConstant(expression.isConstant());
 	}
 
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; expression starts");
-		expression.codeGen(pcx);
+		expression.codeGen(pctx);
 		o.println(";;; expression completes");
 	}
 }

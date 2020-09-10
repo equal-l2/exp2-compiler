@@ -1,4 +1,4 @@
-package lang.c.parse.statement;
+package lang.c.parse.stmt;
 
 import lang.FatalErrorException;
 import lang.c.CParseContext;
@@ -7,25 +7,25 @@ import lang.c.CToken;
 
 public class Statement extends CParseRule {
 	// statement ::= statementAssign
-	private CParseRule stmt;
+	private StatementAssign stmt;
 
 	public static boolean isFirst(CToken tk) {
 		return StatementAssign.isFirst(tk);
 	}
 
 	@Override
-	public void parse(CParseContext pcx) throws FatalErrorException {
+	public void parse(CParseContext pctx) throws FatalErrorException {
 		stmt = new StatementAssign();
-		stmt.parse(pcx);
+		stmt.parse(pctx);
 	}
 
 	@Override
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		stmt.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		stmt.semanticCheck(pctx);
 	}
 
 	@Override
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		stmt.codeGen(pcx);
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		stmt.codeGen(pctx);
 	}
 }

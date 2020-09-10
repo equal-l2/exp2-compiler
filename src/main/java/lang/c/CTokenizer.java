@@ -6,33 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-enum State {
-	INIT,
-	EOF,
-	ILL,
-	PLUS,
-	MINUS,
-	AMP,
-	SLASH,
-	MULT,
-	DIV,
-	LPAR,
-	RPAR,
-	LCOM,
-	BCOM,
-	BCOM_MAYBE_END,
-	NUM,
-	OCT,
-	HEX_BEFORE,
-	HEX,
-	DEC,
-	LBRA,
-	RBRA,
-	IDENT,
-	ASSIGN,
-	SEMI,
-}
-
 public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 	private final CTokenRule rule;
 	private int lineNo = 1, colNo = 1;
@@ -42,7 +15,9 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 	private PrintStream err;
 	// 現在読み込まれているトークンを返す
 	private CToken currentTk;
-	private static final int EOF = (char)-1;
+
+	private static final int CHAR_EOF = (char)-1;
+	private static final int INT_MAX = 0xFFFF;
 
 	public CTokenizer(CTokenRule rule) {
 		this.rule = rule;
@@ -58,7 +33,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				ch = (char) in.read();
 			} catch (IOException e) {
 				e.printStackTrace(err);
-				ch = EOF;
+				ch = CHAR_EOF;
 			}
 		}
 		++colNo;
@@ -92,6 +67,42 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		return currentTk;
 	}
 
+	private static boolean isDigit(char ch) {
+		return '0' <= ch && ch <= '9';
+	}
+
+	private static boolean isLetter(char ch) {
+		return ('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z');
+	}
+
+	private enum State {
+		INIT,
+		EOF,
+		ILL,
+		PLUS,
+		MINUS,
+		AMP,
+		SLASH,
+		MULT,
+		DIV,
+		LPAR,
+		RPAR,
+		LCOM,
+		BCOM,
+		BCOM_MAYBE_END,
+		NUM,
+		OCT,
+		HEX_BEFORE,
+		HEX,
+		DEC,
+		LBRA,
+		RBRA,
+		IDENT,
+		ASSIGN,
+		SEMI,
+		COMMA,
+	}
+
 	private CToken readToken() {
 		CToken tk = null;
 		char ch;
@@ -111,7 +122,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					startCol = colNo - 1;
 
-					if (ch == EOF) {
+					if (ch == CHAR_EOF) {
 						state = State.EOF;
 						break;
 					}
@@ -130,6 +141,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						case ']' -> State.RBRA;
 						case '=' -> State.ASSIGN;
 						case ';' -> State.SEMI;
+						case ',' -> State.COMMA;
 						default -> {
 							if (ch >= '1' && ch <= '9') {
 								yield State.DEC;
@@ -210,12 +222,16 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					tk = new CToken(CToken.TK_SEMI, lineNo, startCol, ";");
 					accept = true;
 					break;
+				case COMMA:
+					tk = new CToken(CToken.TK_COMMA, lineNo, startCol, ",");
+					accept = true;
+					break;
 				case LCOM:
 					ch = readChar();
 					if (ch == '\n') {
 						text.delete(0, text.length()); // コメントがtextに入っているので初期化
 						state = State.INIT;
-					} else if (ch == EOF) {
+					} else if (ch == CHAR_EOF) {
 						text.delete(0, text.length()); // コメントがtextに入っているので初期化
 						state = State.EOF;
 					}
@@ -225,7 +241,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					text.append(ch);
 					if (ch == '*') { // ブロックコメントの終わりかもしれない
 						state = State.BCOM_MAYBE_END;
-					} else if (ch == EOF) { // 終わる前にEOFを踏んだ
+					} else if (ch == CHAR_EOF) { // 終わる前にEOFを踏んだ
 						state = State.ILL;
 					}
 					break;
@@ -236,7 +252,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 							text.delete(0, text.length()); // コメントがtextに入っているので初期化
 							state = State.INIT;
 							break;
-						case EOF: // 終わる前にEOFを踏んだ
+						case CHAR_EOF: // 終わる前にEOFを踏んだ
 							state = State.ILL;
 							break;
 						default: // 終わりじゃなかった
@@ -249,7 +265,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case NUM:
 					ch = readChar();
-					if (ch >= '0' && ch <= '9') {
+					if (ch >= '0' && ch <= '7') {
 						text.append(ch);
 						state = State.OCT;
 					} else if (ch == 'x' || ch == 'X') {
@@ -283,7 +299,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						// 数の終わり
 						backChar(ch);    // 数を表さない文字は戻す（読まなかったことにする）
 						int n = Integer.decode(text.toString());
-						if (n > 0xFFFF) {
+						if (n > INT_MAX) {
 							state = State.ILL;
 						} else {
 							tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
@@ -294,13 +310,13 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				case HEX:
 					ch = readChar();
 					char c = Character.toLowerCase(ch);
-					if ((ch >= '0' && ch <= '9') || (c >= 'a' && c <= 'f')) {
+					if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) {
 						text.append(ch);
 					} else {
 						// 数の終わり
 						backChar(ch);    // 数を表さない文字は戻す（読まなかったことにする）
 						int n = Integer.decode(text.toString());
-						if (n > 0xFFFF) {
+						if (n > INT_MAX) {
 							state = State.ILL;
 						} else {
 							tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
@@ -316,7 +332,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						// 数の終わり
 						backChar(ch);    // 数を表さない文字は戻す（読まなかったことにする）
 						int n = Integer.decode(text.toString());
-						if (n > 0xFFFF) {
+						if (n > INT_MAX) {
 							state = State.ILL;
 						} else {
 							tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
@@ -326,18 +342,20 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case IDENT:
 					ch = readChar();
-					if (Character.isLetterOrDigit(ch) || ch == '_') {
+					if (isLetter(ch) || isDigit(ch) || ch == '_') {
 						text.append(ch);
 					} else {
 						backChar(ch);
-						tk = new CToken(CToken.TK_IDENT, lineNo, startCol, text.toString());
+						var str = text.toString();
+						var reserved = rule.get(str);
+						tk = new CToken(reserved == null ? CToken.TK_IDENT : reserved, lineNo, startCol, str);
 						accept = true;
 					}
 					break;
 			}
 
 		}
-		System.err.println("ACCEPTED");
+		System.err.println("ACCEPTED " + tk.toExplainString());
 		return tk;
 	}
 }

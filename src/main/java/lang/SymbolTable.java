@@ -11,15 +11,15 @@ public abstract class SymbolTable<E extends SymbolTableEntry> extends HashMap<St
 
 	// 全体表示
 	public void show() {
-//		System.out.println("--- Symbol Table ---");
+//		System.err.println("--- Symbol Table ---");
 		for (String label : keySet()) {
 			E e = get(label);
 			if (e == null) {
-				System.out.println(label + "\t= (null) [未定義]");
+				System.err.println(label + "\t= (null) [未定義]");
 			} else {
-				System.out.println(label + "\t= " + e.toExplainString());
+				System.err.println(label + "\t= " + e.toExplainString());
 			}
 		}
-//		System.out.println("------");
+//		System.err.println("------");
 	}
 }

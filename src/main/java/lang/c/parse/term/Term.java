@@ -17,13 +17,13 @@ public class Term extends CParseRule {
 		return Factor.isFirst(tk);
 	}
 
-	public void parse(CParseContext pcx) throws FatalErrorException {
+	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CParseRule factor = new Factor();
-		factor.parse(pcx);
+		factor.parse(pctx);
 
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+		CTokenizer ct = pctx.getTokenizer();
+		CToken tk = ct.getCurrentToken(pctx);
 		CParseRule list;
 		while (true) {
 			if (TermMult.isFirst(tk)) {
@@ -33,23 +33,23 @@ public class Term extends CParseRule {
 			} else {
 				break;
 			}
-			list.parse(pcx);
+			list.parse(pctx);
 			factor = list;
-			tk = ct.getCurrentToken(pcx);
+			tk = ct.getCurrentToken(pctx);
 		}
 		term = factor;
 	}
 
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		term.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		term.semanticCheck(pctx);
 		setCType(term.getCType());
 		setConstant(term.isConstant());
 	}
 
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; term starts");
-		term.codeGen(pcx);
+		term.codeGen(pctx);
 		o.println(";;; term completes");
 	}
 }

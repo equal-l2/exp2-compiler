@@ -1,8 +1,11 @@
-package lang.c.parse.primary;
+package lang.c.parse.prim.rvar;
 
 import lang.FatalErrorException;
-import lang.c.*;
-import lang.c.parse.variable.Variable;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CType;
+import lang.c.parse.var.Variable;
 
 import java.io.PrintStream;
 
@@ -23,36 +26,35 @@ public class FactorAmp extends CParseRule {
 	}
 
 	@Override
-	public void parse(CParseContext pcx) throws FatalErrorException {
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getNextToken(pcx);
+	public void parse(CParseContext pctx) throws FatalErrorException {
+		CToken tk = pctx.getTokenizer().getNextToken(pctx);
 		if (Number.isFirst(tk)) {
 			factorAmp = new Number();
 		} else if (Variable.isFirst(tk)) {
 			factorAmp = new Variable();
 		} else {
-			pcx.fatalError(tk.toExplainString() + "&の後ろはNumberかVariableです");
+			pctx.fatalError(tk.toExplainString() + "&の後ろはNumberかVariableです");
 		}
-		factorAmp.parse(pcx);
+		factorAmp.parse(pctx);
 	}
 
 	@Override
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		factorAmp.semanticCheck(pcx);
+	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
+		factorAmp.semanticCheck(pctx);
 		CType ty = factorAmp.getCType();
 		if (!ty.isCType(CType.T_int)) {
-			pcx.fatalError("cannot take the address of " + ty);
+			pctx.fatalError("cannot take the address of " + ty);
 		}
 		setCType(CType.getCType(CType.T_pint));
 		setConstant(true); // factorAmpはrvalue
 	}
 
 	@Override
-	public void codeGen(CParseContext pcx) throws FatalErrorException {
-		PrintStream o = pcx.getIOContext().getOutStream();
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; factorAmp starts");
 		// factorAmp object will generate address
-		factorAmp.codeGen(pcx);
+		factorAmp.codeGen(pctx);
 		o.println(";;; factorAmp completes");
 	}
 }

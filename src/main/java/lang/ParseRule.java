@@ -1,9 +1,9 @@
 package lang;
 
-public interface ParseRule<Pctx> {
-	void parse(Pctx pcx) throws FatalErrorException;
+public interface ParseRule<PCTX> {
+	void parse(PCTX pctx) throws FatalErrorException;
 
-	void semanticCheck(Pctx pcx) throws FatalErrorException;
+	void semanticCheck(PCTX pctx) throws FatalErrorException;
 
-	void codeGen(Pctx pcx) throws FatalErrorException;
+	void codeGen(PCTX pctx) throws FatalErrorException;
 }
