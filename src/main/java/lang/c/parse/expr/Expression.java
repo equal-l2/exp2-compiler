@@ -17,6 +17,7 @@ public class Expression extends CParseRule {
 		return Term.isFirst(tk);
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CParseRule term = new Term();
@@ -40,12 +41,14 @@ public class Expression extends CParseRule {
 		expression = term;
 	}
 
+	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		expression.semanticCheck(pctx);
 		setCType(expression.getCType());
 		setConstant(expression.isConstant());
 	}
 
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; expression starts");

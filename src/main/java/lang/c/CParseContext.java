@@ -7,6 +7,9 @@ import lang.ParseContext;
 import java.util.function.Predicate;
 
 public class CParseContext extends ParseContext {
+	CSymbolTable symbolTable = new CSymbolTable();
+	private int seqNo;
+
 	public CParseContext(IOContext ioCtx, CTokenizer tknz) {
 		super(ioCtx, tknz);
 	}
@@ -16,10 +19,9 @@ public class CParseContext extends ParseContext {
 		return (CTokenizer) super.getTokenizer();
 	}
 
-	CSymbolTable symbolTable = new CSymbolTable();
-	public CSymbolTable getSymbolTable() { return symbolTable; }
-
-	private int seqNo;
+	public CSymbolTable getSymbolTable() {
+		return symbolTable;
+	}
 
 	public int getSeqId() {
 		return ++seqNo;

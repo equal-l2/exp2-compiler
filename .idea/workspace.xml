@@ -26,13 +26,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/IOContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/SimpleToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/Tokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CParseContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CParseRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CParseRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTableEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/TestCToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/TestCToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/BinaryOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/ConstDecl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/ConstDecl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/Expression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionAdd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionSub.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionSub.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/MinusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/MinusFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/PrimaryMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/PrimaryMult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/UnsignedFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/UnsignedFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/rvar/Number.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/rvar/Number.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementAssign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/Term.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/Term.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Array.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +150,7 @@
       <workItem from="1599341663139" duration="916000" />
       <workItem from="1599445567251" duration="7505000" />
       <workItem from="1599454061609" duration="24342000" />
+      <workItem from="1599899924356" duration="535000" />
     </task>
     <servers />
   </component>
@@ -147,10 +171,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1599873661326">
+    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1599900011266">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599873661326" />
+    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1599900011266" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599455831647">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -183,30 +207,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599713531220" />
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599876390335">
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1599899953067">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599876390335" />
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1599899953067" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog" timestamp="1599697423726">
       <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.805@0.23.1440.805" timestamp="1599697423726" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1599898743497">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1599899912448">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1599898743497" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1599898743493">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1599899912448" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1599899912447">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1599898743493" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1599898743489">
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1599899912447" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1599899912447">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1599898743489" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1599898743495">
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1599899912447" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1599899912448">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1599898743495" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1599899912448" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1599615587224">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

@@ -19,6 +19,7 @@ public class UnsignedFactor extends CParseRule {
 		return FactorAmp.isFirst(tk) || Number.isFirst(tk) || tk.getType() == CToken.TK_LPAR || AddressToValue.isFirst(tk);
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer tknz = pctx.getTokenizer();
@@ -44,12 +45,14 @@ public class UnsignedFactor extends CParseRule {
 		}
 	}
 
+	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		uFactor.semanticCheck(pctx);
 		setCType(uFactor.getCType());
 		setConstant(uFactor.isConstant());
 	}
 
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; unsignedFactor starts");

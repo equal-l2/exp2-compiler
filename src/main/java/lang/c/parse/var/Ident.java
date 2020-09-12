@@ -1,7 +1,10 @@
 package lang.c.parse.var;
 
 import lang.FatalErrorException;
-import lang.c.*;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CSymbolTableEntry;
+import lang.c.CToken;
 
 import java.io.PrintStream;
 

@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class CTokenizer extends Tokenizer<CToken, CParseContext> {
+	private static final int CHAR_EOF = (char) -1;
+	private static final int INT_MAX = 0xFFFF;
 	private final CTokenRule rule;
 	private int lineNo = 1, colNo = 1;
 	private char backCh;
@@ -16,11 +18,16 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 	// 現在読み込まれているトークンを返す
 	private CToken currentTk;
 
-	private static final int CHAR_EOF = (char)-1;
-	private static final int INT_MAX = 0xFFFF;
-
 	public CTokenizer(CTokenRule rule) {
 		this.rule = rule;
+	}
+
+	private static boolean isDigit(char ch) {
+		return '0' <= ch && ch <= '9';
+	}
+
+	private static boolean isLetter(char ch) {
+		return ('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z');
 	}
 
 	private char readChar() {
@@ -65,42 +72,6 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		currentTk = readToken();
 //		System.out.println("Token='" + currentTk.toString());
 		return currentTk;
-	}
-
-	private static boolean isDigit(char ch) {
-		return '0' <= ch && ch <= '9';
-	}
-
-	private static boolean isLetter(char ch) {
-		return ('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z');
-	}
-
-	private enum State {
-		INIT,
-		EOF,
-		ILL,
-		PLUS,
-		MINUS,
-		AMP,
-		SLASH,
-		MULT,
-		DIV,
-		LPAR,
-		RPAR,
-		LCOM,
-		BCOM,
-		BCOM_MAYBE_END,
-		NUM,
-		OCT,
-		HEX_BEFORE,
-		HEX,
-		DEC,
-		LBRA,
-		RBRA,
-		IDENT,
-		ASSIGN,
-		SEMI,
-		COMMA,
 	}
 
 	private CToken readToken() {
@@ -357,5 +328,33 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		}
 		System.err.println("ACCEPTED " + tk.toExplainString());
 		return tk;
+	}
+
+	private enum State {
+		INIT,
+		EOF,
+		ILL,
+		PLUS,
+		MINUS,
+		AMP,
+		SLASH,
+		MULT,
+		DIV,
+		LPAR,
+		RPAR,
+		LCOM,
+		BCOM,
+		BCOM_MAYBE_END,
+		NUM,
+		OCT,
+		HEX_BEFORE,
+		HEX,
+		DEC,
+		LBRA,
+		RBRA,
+		IDENT,
+		ASSIGN,
+		SEMI,
+		COMMA,
 	}
 }

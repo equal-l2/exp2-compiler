@@ -3,10 +3,10 @@ package lang.c;
 import java.util.Objects;
 
 public class CType {
-	public static final int T_err   = 0; // 型エラー
-	public static final int T_int   = 1; // int
-	public static final int T_pint  = 2; // int*
-	public static final int T_aint  = 3; // int[]
+	public static final int T_err = 0; // 型エラー
+	public static final int T_int = 1; // int
+	public static final int T_pint = 2; // int*
+	public static final int T_aint = 3; // int[]
 	public static final int T_apint = 4; // int*[]
 
 	private static final CType[] typeArray = {
@@ -29,16 +29,16 @@ public class CType {
 		return typeArray[type];
 	}
 
+	public static boolean isArray(int t) {
+		return t == T_aint || t == T_apint;
+	}
+
 	public boolean isCType(int t) {
 		return t == type;
 	}
 
 	public boolean isCType(CType t) {
 		return isCType(t.type);
-	}
-
-	public static boolean isArray(int t) {
-		return t == T_aint || t == T_apint;
 	}
 
 	public boolean isArray() {

@@ -1,7 +1,10 @@
 package lang.c.parse.prim.rvar;
 
 import lang.FatalErrorException;
-import lang.c.*;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CType;
 
 import java.io.PrintStream;
 

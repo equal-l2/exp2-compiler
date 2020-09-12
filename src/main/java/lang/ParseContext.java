@@ -2,34 +2,33 @@ package lang;
 
 @SuppressWarnings("rawtypes")
 public abstract class ParseContext {
+	private IOContext ioCtx;            // 入出力コンテキスト
+	private Tokenizer tknz;            // 字句切り出しクラス
+	// エラーの扱いに関するもの
+	private int warningNo;    // 解析警告数
+	private int errorNo;    // 解析エラー数
+
 	// 入出力に関わるメソッド群
 	public ParseContext(IOContext ioCtx, Tokenizer tknz) {
 		this.ioCtx = ioCtx;
 		this.tknz = tknz;
 	}
 
-	private IOContext ioCtx;            // 入出力コンテキスト
-	private Tokenizer tknz;            // 字句切り出しクラス
-
-	public void setIOContext(IOContext ioCtx) {
-		this.ioCtx = ioCtx;
-	}
-
 	public IOContext getIOContext() {
 		return ioCtx;
 	}
 
-	public void setTokenizer(Tokenizer tknz) {
-		this.tknz = tknz;
+	public void setIOContext(IOContext ioCtx) {
+		this.ioCtx = ioCtx;
 	}
 
 	public Tokenizer getTokenizer() {
 		return tknz;
 	}
 
-	// エラーの扱いに関するもの
-	private int warningNo;    // 解析警告数
-	private int errorNo;    // 解析エラー数
+	public void setTokenizer(Tokenizer tknz) {
+		this.tknz = tknz;
+	}
 
 	public void errorReport() {
 		String errstr, warnstr;

@@ -1,7 +1,10 @@
 package lang.c.parse.term;
 
 import lang.FatalErrorException;
-import lang.c.*;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CType;
 import lang.c.parse.BinaryOp;
 import lang.c.parse.factor.Factor;
 
@@ -9,6 +12,14 @@ import java.io.PrintStream;
 
 public class TermDiv extends BinaryOp<Factor> {
 	// termDiv ::= '*' factor
+
+	public TermDiv(CParseRule left) {
+		this.left = left;
+	}
+
+	public static boolean isFirst(CToken tk) {
+		return tk.getType() == CToken.TK_DIV;
+	}
 
 	@Override
 	protected CType getType() {
@@ -24,14 +35,6 @@ public class TermDiv extends BinaryOp<Factor> {
 	@Override
 	protected void typeError(CParseContext pctx) throws FatalErrorException {
 		pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]は右辺の型[" + right.getCType() + "]で除算できません");
-	}
-
-	public TermDiv(CParseRule left) {
-		this.left = left;
-	}
-
-	public static boolean isFirst(CToken tk) {
-		return tk.getType() == CToken.TK_DIV;
 	}
 
 	@Override

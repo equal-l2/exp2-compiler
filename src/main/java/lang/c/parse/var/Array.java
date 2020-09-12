@@ -9,6 +9,7 @@ import java.io.PrintStream;
 public class Array extends CParseRule {
 	// array ::= LBRA expression RBRA
 	private Expression expr;
+
 	public static boolean isFirst(CToken tk) {
 		return tk.getType() == CToken.TK_LBRA;
 	}

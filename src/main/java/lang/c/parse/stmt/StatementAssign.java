@@ -4,7 +4,6 @@ import lang.FatalErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
-import lang.c.CTokenizer;
 import lang.c.parse.expr.Expression;
 import lang.c.parse.prim.Primary;
 

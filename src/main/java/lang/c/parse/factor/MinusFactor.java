@@ -1,7 +1,10 @@
 package lang.c.parse.factor;
 
 import lang.FatalErrorException;
-import lang.c.*;
+import lang.c.CParseContext;
+import lang.c.CParseRule;
+import lang.c.CToken;
+import lang.c.CType;
 import lang.c.parse.prim.UnsignedFactor;
 
 import java.io.PrintStream;
@@ -15,6 +18,7 @@ public class MinusFactor extends CParseRule {
 		return tk.getType() == CToken.TK_MINUS;
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		op = pctx.take();
 		pctx.expect(UnsignedFactor::isFirst, "expected unsignedFactor");
@@ -22,6 +26,7 @@ public class MinusFactor extends CParseRule {
 		uFactor.parse(pctx);
 	}
 
+	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		uFactor.semanticCheck(pctx);
 		CType t = uFactor.getCType();
@@ -33,6 +38,7 @@ public class MinusFactor extends CParseRule {
 		setConstant(uFactor.isConstant());
 	}
 
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; minusFactor starts");

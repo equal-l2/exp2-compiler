@@ -20,6 +20,7 @@ public class Program extends CParseRule {
 		return Declaration.isFirst(tk) || Statement.isFirst(tk);
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		CTokenizer tknz = pctx.getTokenizer();
 		CToken tk = tknz.getCurrentToken(pctx);
@@ -43,20 +44,22 @@ public class Program extends CParseRule {
 		}
 	}
 
+	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
-		for (var decl: decls) {
+		for (var decl : decls) {
 			decl.semanticCheck(pctx);
 		}
 
-		for (var stmt: stmts) {
+		for (var stmt : stmts) {
 			stmt.semanticCheck(pctx);
 		}
 	}
 
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; program starts");
-		for (var decl: decls) {
+		for (var decl : decls) {
 			decl.codeGen(pctx);
 		}
 		o.println("\t. = 0x100");

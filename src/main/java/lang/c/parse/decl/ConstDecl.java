@@ -36,14 +36,14 @@ public class ConstDecl extends CParseRule {
 
 	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
-		for (CParseRule decl: constDecl) {
+		for (CParseRule decl : constDecl) {
 			decl.semanticCheck(pctx);
 		}
 	}
 
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
-		for (CParseRule decl: constDecl) {
+		for (CParseRule decl : constDecl) {
 			decl.codeGen(pctx);
 		}
 	}

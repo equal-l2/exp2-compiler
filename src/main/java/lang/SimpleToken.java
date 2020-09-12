@@ -11,6 +11,13 @@ public class SimpleToken extends Token {
 	private final int lineNo;                // このトークンがあった行
 	private final int colNo;                // このトークンがあった桁
 
+	public SimpleToken(int type, int lineNo, int colNo, String s) {
+		this.type = type;
+		this.lineNo = lineNo;
+		this.colNo = colNo;
+		text = s;
+	}
+
 	@Override
 	public int getType() {
 		return type;
@@ -44,12 +51,5 @@ public class SimpleToken extends Token {
 
 	public int getIntValue() {
 		return Integer.decode(text);
-	}
-
-	public SimpleToken(int type, int lineNo, int colNo, String s) {
-		this.type = type;
-		this.lineNo = lineNo;
-		this.colNo = colNo;
-		text = s;
 	}
 }

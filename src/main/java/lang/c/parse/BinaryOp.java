@@ -29,7 +29,7 @@ public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 		right.semanticCheck(pctx);
 
 		CType t = getType();
-		if (t.isCType(CType.T_err)){
+		if (t.isCType(CType.T_err)) {
 			typeError(pctx);
 		}
 		setCType(t);

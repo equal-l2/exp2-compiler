@@ -16,6 +16,7 @@ public class Factor extends CParseRule {
 		return PlusFactor.isFirst(tk) || MinusFactor.isFirst(tk) || UnsignedFactor.isFirst(tk);
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CToken tk = pctx.getTokenizer().getCurrentToken(pctx);
@@ -31,12 +32,14 @@ public class Factor extends CParseRule {
 		factor.parse(pctx);
 	}
 
+	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		factor.semanticCheck(pctx);
 		setCType(factor.getCType());
 		setConstant(factor.isConstant());
 	}
 
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; factor starts");

@@ -17,6 +17,7 @@ public class Term extends CParseRule {
 		return Factor.isFirst(tk);
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CParseRule factor = new Factor();
@@ -40,12 +41,14 @@ public class Term extends CParseRule {
 		term = factor;
 	}
 
+	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		term.semanticCheck(pctx);
 		setCType(term.getCType());
 		setConstant(term.isConstant());
 	}
 
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; term starts");

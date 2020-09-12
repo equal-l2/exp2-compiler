@@ -8,7 +8,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 
 	public CSymbolTableEntry(CType type, boolean isConst) {
 		this.type = type;
-		this.isConst= isConst;
+		this.isConst = isConst;
 	}
 
 	@Override
@@ -16,7 +16,9 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 		return "CSymbolTableEntry { type: " + type + ", isConst: " + isConst + " }";
 	}
 
-	public CType getType() { return type; }
+	public CType getType() {
+		return type;
+	}
 
 	public boolean isConst() {
 		return isConst;

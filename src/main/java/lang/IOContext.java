@@ -10,6 +10,13 @@ public class IOContext {
 	private PrintStream out;
 	private PrintStream err;
 
+	public IOContext(String inputFileName, PrintStream out, PrintStream err) {
+		this.out = out;
+		this.err = err;
+		openInput(inputFileName);
+		this.inputFileName = inputFileName;
+	}
+
 	public InputStream getInStream() {
 		return in;
 	}
@@ -24,13 +31,6 @@ public class IOContext {
 
 	public String getInputFileName() {
 		return inputFileName;
-	}
-
-	public IOContext(String inputFileName, PrintStream out, PrintStream err) {
-		this.out = out;
-		this.err = err;
-		openInput(inputFileName);
-		this.inputFileName = inputFileName;
 	}
 
 	private void openInput(String inputFileName) {
