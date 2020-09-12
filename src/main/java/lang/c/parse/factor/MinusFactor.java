@@ -23,19 +23,13 @@ public class MinusFactor extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
-		// 単項マイナスの型規則
-		final int[] rule = {
-				CType.T_err, // T_err
-				CType.T_int, // T_int
-				CType.T_err, // T_pint
-		};
-
 		uFactor.semanticCheck(pctx);
-		int t = uFactor.getCType().getType();
-		if (rule[t] == CType.T_err) {
+		CType t = uFactor.getCType();
+		if (t.isCType(CType.T_int)) {
+			setCType(t);
+		} else {
 			pctx.fatalError(op.toExplainString() + "型[" + uFactor.getCType() + "]に単項マイナス演算子は適用できません");
 		}
-		setCType(CType.getCType(t));
 		setConstant(uFactor.isConstant());
 	}
 

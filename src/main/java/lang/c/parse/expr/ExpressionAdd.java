@@ -2,15 +2,36 @@ package lang.c.parse.expr;
 
 import lang.FatalErrorException;
 import lang.c.*;
+import lang.c.parse.BinaryOp;
 import lang.c.parse.term.Term;
 
 import java.io.PrintStream;
 
-public class ExpressionAdd extends CParseRule {
+public class ExpressionAdd extends BinaryOp<Term> {
 	// expressionAdd ::= '+' term
-	private CToken op;
-	private final CParseRule left;
-	private Term right;
+
+	@Override
+	protected CType getType() {
+		CType lhs = left.getCType();
+		CType rhs = right.getCType();
+		if (lhs.isCType(CType.T_int) && rhs.isCType(CType.T_int)) {
+			return CType.getCType(CType.T_int);
+		}
+		else if (lhs.isCType(CType.T_pint) && rhs.isCType(CType.T_int)) {
+			return CType.getCType(CType.T_pint);
+		}
+		else if (lhs.isCType(CType.T_int) && rhs.isCType(CType.T_pint)) {
+			return CType.getCType(CType.T_pint);
+		}
+		else {
+			return CType.getCType(CType.T_err);
+		}
+	}
+
+	@Override
+	protected void typeError(CParseContext pctx) throws FatalErrorException {
+		pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]と右辺の型[" + right.getCType() + "]は足せません");
+	}
 
 	public ExpressionAdd(CParseRule left) {
 		this.left = left;
@@ -20,6 +41,7 @@ public class ExpressionAdd extends CParseRule {
 		return tk.getType() == CToken.TK_PLUS;
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		op = pctx.take();
 		pctx.expect(Term::isFirst, "+の後ろはtermです");
@@ -27,26 +49,7 @@ public class ExpressionAdd extends CParseRule {
 		right.parse(pctx);
 	}
 
-	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
-		// 足し算の型計算規則
-		final int[][] rule = {
-				//(右辺)   T_err         T_int         T_pint
-				{CType.T_err, CType.T_err, CType.T_err},    // T_err
-				{CType.T_err, CType.T_int, CType.T_pint},   // T_int
-				{CType.T_err, CType.T_pint, CType.T_err},    // T_pint
-		};
-		left.semanticCheck(pctx);
-		right.semanticCheck(pctx);
-		int lt = left.getCType().getType();  // +の左辺の型
-		int rt = right.getCType().getType(); // +の右辺の型
-		int nt = rule[lt][rt];                  // 規則による型計算
-		if (nt == CType.T_err) {
-			pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]と右辺の型[" + right.getCType() + "]は足せません");
-		}
-		setCType(CType.getCType(nt));
-		setConstant(left.isConstant() && right.isConstant());    // +の左右両方が定数のときだけ定数
-	}
-
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		left.codeGen(pctx);        // 左部分木のコード生成を頼む

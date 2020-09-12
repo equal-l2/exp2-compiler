@@ -2,15 +2,29 @@ package lang.c.parse.term;
 
 import lang.FatalErrorException;
 import lang.c.*;
+import lang.c.parse.BinaryOp;
 import lang.c.parse.factor.Factor;
 
 import java.io.PrintStream;
 
-public class TermMult extends CParseRule {
+public class TermMult extends BinaryOp<Factor> {
 	// termMult ::= '*' factor
-	private CToken op;
-	private final CParseRule left;
-	private Factor right;
+
+	@Override
+	protected CType getType() {
+		CType lhs = left.getCType();
+		CType rhs = right.getCType();
+		if (lhs.isCType(CType.T_int) && rhs.isCType(CType.T_int)) {
+			return CType.getCType(CType.T_int);
+		} else {
+			return CType.getCType(CType.T_err);
+		}
+	}
+
+	@Override
+	protected void typeError(CParseContext pctx) throws FatalErrorException {
+		pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]と右辺の型[" + right.getCType() + "]は乗算できません");
+	}
 
 	public TermMult(CParseRule left) {
 		this.left = left;
@@ -20,6 +34,7 @@ public class TermMult extends CParseRule {
 		return tk.getType() == CToken.TK_MULT;
 	}
 
+	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
 		op = pctx.take();
 		pctx.expect(Factor::isFirst, "*の後ろはfactorです");
@@ -27,26 +42,7 @@ public class TermMult extends CParseRule {
 		right.parse(pctx);
 	}
 
-	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
-		// 乗算の型計算規則
-		final int[][] rule = {
-				//(右辺)     T_err        T_int        T_pint
-				{CType.T_err, CType.T_err, CType.T_err},    // T_err
-				{CType.T_err, CType.T_int, CType.T_err},    // T_int
-				{CType.T_err, CType.T_err, CType.T_err},    // T_pint
-		};
-		left.semanticCheck(pctx);
-		right.semanticCheck(pctx);
-		int lt = left.getCType().getType();
-		int rt = right.getCType().getType();
-		int nt = rule[lt][rt];
-		if (nt == CType.T_err) {
-			pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]と右辺の型[" + right.getCType() + "]は乗算できません");
-		}
-		setCType(CType.getCType(nt));
-		setConstant(left.isConstant() && right.isConstant());
-	}
-
+	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		left.codeGen(pctx);        // 左部分木のコード生成を頼む
