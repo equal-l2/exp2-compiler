@@ -5,7 +5,6 @@ import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CType;
-import lang.c.parse.term.Term;
 
 public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 	// binaryOp ::= OP operand

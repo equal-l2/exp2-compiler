@@ -72,7 +72,7 @@ class DeclItem extends CParseRule {
 		name = ident.getText();
 
 		if (tknz.getCurrentToken(pctx).getType() == CToken.TK_LBRA) {
-			CToken tk = tknz.getNextToken(pctx);
+			tknz.getNextToken(pctx);
 			size = pctx.consume(CToken.TK_NUM, "expected NUM").getText();
 
 			pctx.consume(CToken.TK_RBRA, "expected ']'");

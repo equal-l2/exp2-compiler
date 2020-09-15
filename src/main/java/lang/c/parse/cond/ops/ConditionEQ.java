@@ -4,8 +4,6 @@ import lang.c.CParseContext;
 import lang.c.CToken;
 import lang.c.parse.expr.Expression;
 
-import java.io.PrintStream;
-
 public class ConditionEQ extends ConditionOps {
 	// conditionEQ ::= EQ expression
 

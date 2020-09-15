@@ -8,8 +8,6 @@ import lang.c.CType;
 import lang.c.parse.BinaryOp;
 import lang.c.parse.factor.Factor;
 
-import java.io.PrintStream;
-
 public class TermMult extends BinaryOp<Factor> {
 	// termMult ::= '*' factor
 

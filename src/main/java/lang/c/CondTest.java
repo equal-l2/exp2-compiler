@@ -2,7 +2,6 @@ package lang.c;
 
 import lang.FatalErrorException;
 import lang.IOContext;
-import lang.c.parse.Program;
 import lang.c.parse.cond.Condition;
 
 public class CondTest {

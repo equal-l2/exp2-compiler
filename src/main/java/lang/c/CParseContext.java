@@ -7,7 +7,7 @@ import lang.ParseContext;
 import java.util.function.Predicate;
 
 public class CParseContext extends ParseContext {
-	CSymbolTable symbolTable = new CSymbolTable();
+	private CSymbolTable symbolTable = new CSymbolTable();
 	private int seqNo;
 
 	public CParseContext(IOContext ioCtx, CTokenizer tknz) {
