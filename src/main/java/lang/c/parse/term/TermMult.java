@@ -38,21 +38,15 @@ public class TermMult extends BinaryOp<Factor> {
 	}
 
 	@Override
-	public void parse(CParseContext pctx) throws FatalErrorException {
-		op = pctx.take();
+	protected void initRight(CParseContext pctx) throws FatalErrorException {
 		pctx.expect(Factor::isFirst, "*の後ろはfactorです");
 		right = new Factor();
-		right.parse(pctx);
 	}
 
 	@Override
-	public void codeGen(CParseContext pctx) throws FatalErrorException {
-		PrintStream o = pctx.getIOContext().getOutStream();
-		left.codeGen(pctx);        // 左部分木のコード生成を頼む
-		right.codeGen(pctx);        // 右部分木のコード生成を頼む
-
+	protected void emitBiOpAsm(CParseContext pctx) {
 		// MULにはスタックに載っている値を使って計算してもらう
 		// 結果もスタックに載せてもらう
-		o.println("\tJSR\tMUL\t;");
+		pctx.getIOContext().getOutStream().println("\tJSR\tMUL\t;");
 	}
 }

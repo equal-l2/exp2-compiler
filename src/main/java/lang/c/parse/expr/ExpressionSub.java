@@ -42,20 +42,14 @@ public class ExpressionSub extends BinaryOp<Term> {
 	}
 
 	@Override
-	public void parse(CParseContext pctx) throws FatalErrorException {
-		// ここにやってくるときは、必ずisFirst()が満たされている
-		op = pctx.take();
+	protected void initRight(CParseContext pctx) throws FatalErrorException {
 		pctx.expect(Term::isFirst, "-の後ろはtermです");
 		right = new Term();
-		right.parse(pctx);
 	}
 
 	@Override
-	public void codeGen(CParseContext pctx) throws FatalErrorException {
+	protected void emitBiOpAsm(CParseContext pctx) {
 		PrintStream o = pctx.getIOContext().getOutStream();
-		left.codeGen(pctx);  // 左部分木のコード生成を頼む
-		right.codeGen(pctx); // 右部分木のコード生成を頼む
-
 		// R0に結果が載るように、ポップ順をExpressionAddとは逆にする
 		o.println("\tMOV\t-(R6), R1\t; ExpressionSub: ２数を取り出して、引き、積む<" + op + ">");
 		o.println("\tMOV\t-(R6), R0\t; ExpressionSub:");

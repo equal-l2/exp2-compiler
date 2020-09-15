@@ -42,18 +42,14 @@ public class ExpressionAdd extends BinaryOp<Term> {
 	}
 
 	@Override
-	public void parse(CParseContext pctx) throws FatalErrorException {
-		op = pctx.take();
+	protected void initRight(CParseContext pctx) throws FatalErrorException {
 		pctx.expect(Term::isFirst, "+の後ろはtermです");
 		right = new Term();
-		right.parse(pctx);
 	}
 
 	@Override
-	public void codeGen(CParseContext pctx) throws FatalErrorException {
+	protected void emitBiOpAsm(CParseContext pctx) {
 		PrintStream o = pctx.getIOContext().getOutStream();
-		left.codeGen(pctx);        // 左部分木のコード生成を頼む
-		right.codeGen(pctx);        // 右部分木のコード生成を頼む
 		o.println("\tMOV\t-(R6), R0\t; ExpressionAdd: ２数を取り出して、足し、積む<" + op + ">");
 		o.println("\tMOV\t-(R6), R1\t; ExpressionAdd:");
 		o.println("\tADD\tR1, R0\t; ExpressionAdd:");

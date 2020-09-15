@@ -5,6 +5,7 @@ import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CType;
+import lang.c.parse.term.Term;
 
 public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 	// binaryOp ::= OP operand
@@ -17,11 +18,21 @@ public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 
 	protected abstract void typeError(CParseContext pctx) throws FatalErrorException;
 
-	@Override
-	public abstract void parse(CParseContext pctx) throws FatalErrorException;
+	// Check if the next token can be parsed as `Operand`,
+	// assign `Operand` object to `right` if so.
+	protected abstract void initRight(CParseContext pctx) throws FatalErrorException;
+
+	// emit asm for the operator using lhs(R0) and rhs(R1)
+	// the result must be on the stack
+	protected abstract void emitBiOpAsm(CParseContext pctx);
 
 	@Override
-	public abstract void codeGen(CParseContext pctx) throws FatalErrorException;
+	public void parse(CParseContext pctx) throws FatalErrorException {
+		// ここにやってくるときは、必ずisFirst()が満たされている
+		op = pctx.take();
+		initRight(pctx);
+		right.parse(pctx);
+	}
 
 	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
@@ -34,5 +45,12 @@ public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 		}
 		setCType(t);
 		setConstant(left.isConstant() && right.isConstant());
+	}
+
+	@Override
+	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		left.codeGen(pctx);  // 左部分木のコード生成を頼む
+		right.codeGen(pctx); // 右部分木のコード生成を頼む
+		emitBiOpAsm(pctx);
 	}
 }
