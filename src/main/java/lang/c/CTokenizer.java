@@ -110,9 +110,12 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						case ')' -> State.RPAR;
 						case '[' -> State.LBRA;
 						case ']' -> State.RBRA;
-						case '=' -> State.ASSIGN;
+						case '=' -> State.EQUAL;
 						case ';' -> State.SEMI;
 						case ',' -> State.COMMA;
+						case '<' -> State.LESS;
+						case '>' -> State.GREAT;
+						case '!' -> State.NEGATE;
 						default -> {
 							if (ch >= '1' && ch <= '9') {
 								yield State.DEC;
@@ -185,8 +188,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					tk = new CToken(CToken.TK_RBRA, lineNo, startCol, "]");
 					accept = true;
 					break;
-				case ASSIGN:
-					tk = new CToken(CToken.TK_ASSIGN, lineNo, startCol, "=");
+				case EQUAL:
+					ch = readChar();
+					if (ch == '=') {
+						tk = new CToken(CToken.TK_EQ, lineNo, startCol, "==");
+					} else {
+						backChar(ch);
+						tk = new CToken(CToken.TK_ASSIGN, lineNo, startCol, "=");
+					}
 					accept = true;
 					break;
 				case SEMI:
@@ -213,6 +222,36 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					if (ch == '*') { // ブロックコメントの終わりかもしれない
 						state = State.BCOM_MAYBE_END;
 					} else if (ch == CHAR_EOF) { // 終わる前にEOFを踏んだ
+						state = State.ILL;
+					}
+					break;
+				case LESS:
+					ch = readChar();
+					if (ch == '=') {
+						tk = new CToken(CToken.TK_LE, lineNo, startCol, "<=");
+					} else {
+						backChar(ch);
+						tk = new CToken(CToken.TK_LT, lineNo, startCol, "<");
+					}
+					accept = true;
+					break;
+				case GREAT:
+					ch = readChar();
+					if (ch == '=') {
+						tk = new CToken(CToken.TK_GE, lineNo, startCol, ">=");
+					} else {
+						backChar(ch);
+						tk = new CToken(CToken.TK_GT, lineNo, startCol, ">");
+					}
+					accept = true;
+					break;
+				case NEGATE:
+					ch = readChar();
+					if (ch == '=') {
+						tk = new CToken(CToken.TK_GE, lineNo, startCol, "!=");
+						accept = true;
+					} else {
+						text.append(ch);
 						state = State.ILL;
 					}
 					break;
@@ -353,8 +392,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		LBRA,
 		RBRA,
 		IDENT,
-		ASSIGN,
+		EQUAL,
 		SEMI,
 		COMMA,
+		LESS,
+		GREAT,
+		NEGATE,
 	}
 }
