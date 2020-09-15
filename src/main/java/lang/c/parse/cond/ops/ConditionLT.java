@@ -26,4 +26,9 @@ public class ConditionLT extends ConditionOps {
 		o.println(label + ":\t\t; ConditionLT");
 		o.println("\tMOV\tR2, (R6)+\t; ConditionLT: push the result to the stack");
 	}
+
+	@Override
+	protected String getElementName() {
+		return "conditionLT";
+	}
 }

@@ -13,6 +13,7 @@ public class StatementAssign extends CParseRule {
 	// statementAssign ::= primary ASSIGN expression SEMI
 
 	private Primary prim;
+	private CToken eq;
 	private Expression expr;
 
 	public static boolean isFirst(CToken tk) {
@@ -24,7 +25,7 @@ public class StatementAssign extends CParseRule {
 		prim = new Primary();
 		prim.parse(pctx);
 
-		pctx.consume(CToken.TK_ASSIGN, "expected '='");
+		eq = pctx.consume(CToken.TK_ASSIGN, "expected '='");
 
 		expr = new Expression();
 		expr.parse(pctx);
@@ -37,7 +38,7 @@ public class StatementAssign extends CParseRule {
 		prim.semanticCheck(pctx);
 		expr.semanticCheck(pctx);
 		if (!prim.getCType().isCType(expr.getCType())) {
-			pctx.fatalError("cannot assign " + expr.getCType() + " to " + prim.getCType());
+			pctx.fatalError(eq.toExplainString() + "cannot assign " + expr.getCType() + " to " + prim.getCType());
 		}
 		if (prim.isConstant()) {
 			pctx.fatalError("lhs is const");

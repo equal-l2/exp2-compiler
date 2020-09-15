@@ -35,6 +35,10 @@ public class CType {
 		return t == T_aint || t == T_apint;
 	}
 
+	public static CType getErrorType() {
+		return typeArray[T_err];
+	}
+
 	public boolean isCType(int t) {
 		return t == type;
 	}

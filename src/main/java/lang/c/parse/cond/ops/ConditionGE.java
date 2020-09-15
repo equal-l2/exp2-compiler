@@ -26,4 +26,9 @@ public class ConditionGE extends ConditionOps {
 		o.println(label + ":\t\t; ConditionGE");
 		o.println("\tMOV\tR2, (R6)+\t; ConditionGE: push the result to the stack");
 	}
+
+	@Override
+	protected String getElementName() {
+		return "conditionGE";
+	}
 }

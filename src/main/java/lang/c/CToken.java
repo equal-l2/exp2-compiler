@@ -50,9 +50,4 @@ public class CToken extends SimpleToken {
 			default -> super.getTypeString();
 		};
 	}
-
-	@Override
-	public String toExplainString() {
-		return "[" + getLineNo() + "行目," + getColumnNo() + "文字目の'" + getText() + "' (type=" + getTypeString() + ")]";
-	}
 }

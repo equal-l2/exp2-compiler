@@ -26,14 +26,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/UnaryOps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CParseContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CondTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CondTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/BinaryOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/BinaryOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/BinaryOps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionEQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionEQ.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/IntDecl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/IntDecl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionGE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionGE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionGT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionGT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionLE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionLE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionLT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionLT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionNE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionNE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionOps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ConditionOps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionSub.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/expr/ExpressionSub.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/MinusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/MinusFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/PrimaryMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/PrimaryMult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementAssign.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" afterDir="false" />
     </list>
@@ -94,6 +104,7 @@
       <recent name="lang.c.parse" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lang.c.parse" />
       <recent name="lang.c" />
       <recent name="lang.c.parse.cond" />
     </key>
@@ -136,7 +147,7 @@
       <workItem from="1599445567251" duration="7505000" />
       <workItem from="1599454061609" duration="24342000" />
       <workItem from="1599899924356" duration="4554000" />
-      <workItem from="1600153504592" duration="8139000" />
+      <workItem from="1600153504592" duration="13036000" />
     </task>
     <servers />
   </component>
@@ -157,18 +168,18 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1600165768673">
+    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1600210907211">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1600165768673" />
+    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1600210907211" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599903721537">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599903721537" />
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1600158491691">
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1600210432069">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1600158491691" />
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1600210432069" />
     <state x="432" y="174" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1599819388194">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -193,10 +204,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599713531220" />
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600165479676">
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600210857263">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1600165479676" />
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1600210857263" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog" timestamp="1599697423726">
       <screen x="0" y="23" width="1440" height="805" />
     </state>

@@ -5,10 +5,10 @@ import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CType;
-import lang.c.parse.BinaryOp;
+import lang.c.parse.BinaryOps;
 import lang.c.parse.factor.Factor;
 
-public class TermMult extends BinaryOp<Factor> {
+public class TermMult extends BinaryOps<Factor> {
 	// termMult ::= '*' factor
 
 	public TermMult(CParseRule left) {
@@ -31,11 +31,6 @@ public class TermMult extends BinaryOp<Factor> {
 	}
 
 	@Override
-	protected void typeError(CParseContext pctx) throws FatalErrorException {
-		pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]と右辺の型[" + right.getCType() + "]は乗算できません");
-	}
-
-	@Override
 	protected void initRight(CParseContext pctx) throws FatalErrorException {
 		pctx.expect(Factor::isFirst, "*の後ろはfactorです");
 		right = new Factor();
@@ -46,5 +41,10 @@ public class TermMult extends BinaryOp<Factor> {
 		// MULにはスタックに載っている値を使って計算してもらう
 		// 結果もスタックに載せてもらう
 		pctx.getIOContext().getOutStream().println("\tJSR\tMUL\t;");
+	}
+
+	@Override
+	protected String getElementName() {
+		return "termMult";
 	}
 }

@@ -2,35 +2,47 @@ package lang.c.parse.factor;
 
 import lang.FatalErrorException;
 import lang.c.CParseContext;
-import lang.c.CParseRule;
 import lang.c.CToken;
+import lang.c.CType;
+import lang.c.parse.UnaryOps;
 import lang.c.parse.prim.UnsignedFactor;
 
-public class PlusFactor extends CParseRule {
+public class PlusFactor extends UnaryOps<UnsignedFactor> {
 	// plusFactor ::= PLUS unsignedFactor
-	private UnsignedFactor uFactor;
 
 	public static boolean isFirst(CToken tk) {
 		return tk.getType() == CToken.TK_PLUS;
 	}
 
 	@Override
-	public void parse(CParseContext pctx) throws FatalErrorException {
-		pctx.take();
-		pctx.expect(UnsignedFactor::isFirst, "expected unsignedFactor");
-		uFactor = new UnsignedFactor();
-		uFactor.parse(pctx);
+	protected CType getType() {
+		var t = operand.getCType();
+		if (t.isCType(CType.T_int)) {
+			return t;
+		} else {
+			return CType.getErrorType();
+		}
 	}
 
 	@Override
-	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
-		uFactor.semanticCheck(pctx);
-		setCType(uFactor.getCType());
-		setConstant(uFactor.isConstant());
+	protected void initOperand(CParseContext pctx) throws FatalErrorException {
+		pctx.expect(UnsignedFactor::isFirst, "expected unsignedFactor");
+		operand = new UnsignedFactor();
+	}
+
+	@Override
+	protected void emitUnary(CParseContext pctx) {
+		// no-op as this overrides codeGen
+	}
+
+	@Override
+	protected String getElementName() {
+		// no-op as this overrides codeGen
+		return null;
 	}
 
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
-		uFactor.codeGen(pctx);
+		operand.codeGen(pctx);
 	}
 }

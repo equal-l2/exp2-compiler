@@ -26,4 +26,9 @@ public class ConditionNE extends ConditionOps {
 		o.println(label + ":\t\t; ConditionNE");
 		o.println("\tMOV\tR2, (R6)+\t; ConditionEQ: push the result to the stack");
 	}
+
+	@Override
+	protected String getElementName() {
+		return "conditionNE";
+	}
 }

@@ -26,4 +26,9 @@ public class ConditionLE extends ConditionOps {
 		o.println(label + ":\t\t; ConditionLE");
 		o.println("\tMOV\tR2, (R6)+\t; ConditionLE: push the result to the stack");
 	}
+
+	@Override
+	protected String getElementName() {
+		return "conditionLE";
+	}
 }

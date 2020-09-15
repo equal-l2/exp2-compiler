@@ -5,10 +5,10 @@ import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CType;
-import lang.c.parse.BinaryOp;
+import lang.c.parse.BinaryOps;
 import lang.c.parse.factor.Factor;
 
-public class TermDiv extends BinaryOp<Factor> {
+public class TermDiv extends BinaryOps<Factor> {
 	// termDiv ::= '/' factor
 
 	public TermDiv(CParseRule left) {
@@ -31,11 +31,6 @@ public class TermDiv extends BinaryOp<Factor> {
 	}
 
 	@Override
-	protected void typeError(CParseContext pctx) throws FatalErrorException {
-		pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]は右辺の型[" + right.getCType() + "]で除算できません");
-	}
-
-	@Override
 	protected void initRight(CParseContext pctx) throws FatalErrorException {
 		pctx.expect(Factor::isFirst, "/の後ろはfactorです");
 		right = new Factor();
@@ -46,5 +41,10 @@ public class TermDiv extends BinaryOp<Factor> {
 		// DIVにはスタックに載っている値を使って計算してもらう
 		// 結果もスタックに載せてもらう
 		pctx.getIOContext().getOutStream().println("\tJSR\tDIV\t;");
+	}
+
+	@Override
+	protected String getElementName() {
+		return "termDiv";
 	}
 }

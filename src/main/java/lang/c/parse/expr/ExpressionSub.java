@@ -5,12 +5,12 @@ import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CType;
-import lang.c.parse.BinaryOp;
+import lang.c.parse.BinaryOps;
 import lang.c.parse.term.Term;
 
 import java.io.PrintStream;
 
-public class ExpressionSub extends BinaryOp<Term> {
+public class ExpressionSub extends BinaryOps<Term> {
 	// expressionSub ::= '-' term
 
 	public ExpressionSub(CParseRule left) {
@@ -37,11 +37,6 @@ public class ExpressionSub extends BinaryOp<Term> {
 	}
 
 	@Override
-	protected void typeError(CParseContext pctx) throws FatalErrorException {
-		pctx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType() + "]から右辺の型[" + right.getCType() + "]は引けません");
-	}
-
-	@Override
 	protected void initRight(CParseContext pctx) throws FatalErrorException {
 		pctx.expect(Term::isFirst, "-の後ろはtermです");
 		right = new Term();
@@ -55,5 +50,10 @@ public class ExpressionSub extends BinaryOp<Term> {
 		o.println("\tMOV\t-(R6), R0\t; ExpressionSub:");
 		o.println("\tSUB\tR1, R0\t; ExpressionSub:");
 		o.println("\tMOV\tR0, (R6)+\t; ExpressionSub:");
+	}
+
+	@Override
+	protected String getElementName() {
+		return "expressionSub";
 	}
 }

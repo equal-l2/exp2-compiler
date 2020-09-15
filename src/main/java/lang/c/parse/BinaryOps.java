@@ -6,8 +6,8 @@ import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CType;
 
-public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
-	// binaryOp ::= OP operand
+public abstract class BinaryOps<Operand extends CParseRule> extends CParseRule {
+	// binaryOps ::= OP operand
 
 	protected CToken op;
 	protected CParseRule left;
@@ -15,15 +15,25 @@ public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 
 	protected abstract CType getType();
 
-	protected abstract void typeError(CParseContext pctx) throws FatalErrorException;
+	protected void typeError(CParseContext pctx) throws FatalErrorException {
+		var opExplain = op.toExplainString();
+		var opText = op.getText();
+		var rType = right.getCType();
+		var lType = left.getCType();
+		pctx.fatalError(opExplain + " invalid operand types for binary operator '" + opText + "' ('" + lType + "' and '" + rType + "')");
+	}
 
 	// Check if the next token can be parsed as `Operand`,
 	// assign `Operand` object to `right` if so.
 	protected abstract void initRight(CParseContext pctx) throws FatalErrorException;
 
-	// emit asm for the operator using lhs(R0) and rhs(R1)
-	// the result must be on the stack
+	// emit asm for the operator using lhs and rhs on the stack
+	// the result must be also on the stack
 	protected abstract void emitBiOpAsm(CParseContext pctx);
+
+	// get name of the element class
+	// this is used to indicate the beginning and the ending of the element in asm
+	protected abstract String getElementName();
 
 	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
@@ -48,8 +58,13 @@ public abstract class BinaryOp<Operand extends CParseRule> extends CParseRule {
 
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
+		var o = pctx.getIOContext().getOutStream();
+		var name = getElementName();
+
+		o.println(";;; " + name + " starts");
 		left.codeGen(pctx);  // 左部分木のコード生成を頼む
 		right.codeGen(pctx); // 右部分木のコード生成を頼む
 		emitBiOpAsm(pctx);
+		o.println(";;; " + name + " completes");
 	}
 }

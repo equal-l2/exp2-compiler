@@ -26,4 +26,9 @@ public class ConditionGT extends ConditionOps {
 		o.println(label + ":\t\t; ConditionGT");
 		o.println("\tMOV\tR2, (R6)+\t; ConditionGT: push the result to the stack");
 	}
+
+	@Override
+	protected String getElementName() {
+		return "conditionGT";
+	}
 }
