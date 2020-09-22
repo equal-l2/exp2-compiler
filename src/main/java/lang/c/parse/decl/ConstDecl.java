@@ -54,8 +54,9 @@ class ConstItem extends CParseRule {
 
 	private CType lhs_type = CType.getCType(CType.T_int);
 	private CType rhs_type = CType.getCType(CType.T_int);
-	private String value;
 	private String name;
+	private String value;
+	private CSymbolTableEntry entry;
 
 	public static boolean isFirst(CToken tk) {
 		int ty = tk.getType();
@@ -82,10 +83,14 @@ class ConstItem extends CParseRule {
 
 		value = pctx.consume(CToken.TK_NUM, "expected NUM").getText();
 
-		var ret = pctx.getSymbolTable().register(name, new CSymbolTableEntry(lhs_type, true));
+		final int size = 1; // only implemented for int and int*
+
+		var table = pctx.getSymbolTable();
+		var ret = table.register(name, lhs_type, size, true);
 		if (ret != null) {
 			pctx.fatalError(ident.toExplainString() + " Identifier \"" + name + "\" is already declared");
 		}
+		entry = table.search(name);
 	}
 
 	@Override
@@ -98,7 +103,14 @@ class ConstItem extends CParseRule {
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
-		o.println(name + ":");
-		o.println("\t.WORD\t" + value + "\t; ConstDecl");
+		if (entry.isGlobal()) {
+			o.println(name + ":");
+			o.println("\t.WORD\t" + value + "\t; ConstDecl");
+		} else {
+			// assume R4 is frame ptr
+			o.println("\tMOV\tR4, R3\t; ConstDecl: スタックポインタのアドレスをR3へ");
+			o.println("\tMOV\t#" + entry.getOffset() + ", R3\t; ConstDecl: 局所変数のオフセットを加算");
+			o.println("\tMOV\t#" + value + ", (R3)\t; ConstDecl: 局所変数に値を代入");
+		}
 	}
 }

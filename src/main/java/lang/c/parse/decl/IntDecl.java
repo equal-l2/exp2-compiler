@@ -52,8 +52,8 @@ class DeclItem extends CParseRule {
 	// declItem ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
 
 	private CType type = CType.getCType(CType.T_int);
-	private String size;
 	private String name;
+	private CSymbolTableEntry entry;
 
 	public static boolean isFirst(CToken tk) {
 		int ty = tk.getType();
@@ -71,19 +71,22 @@ class DeclItem extends CParseRule {
 		CToken ident = pctx.consume(CToken.TK_IDENT, "expected IDENT");
 		name = ident.getText();
 
+		int size = 1;
 		if (tknz.getCurrentToken(pctx).getType() == CToken.TK_LBRA) {
 			tknz.getNextToken(pctx);
-			size = pctx.consume(CToken.TK_NUM, "expected NUM").getText();
+			size = Integer.parseInt(pctx.consume(CToken.TK_NUM, "expected NUM").getText());
 
 			pctx.consume(CToken.TK_RBRA, "expected ']'");
 
 			type = type.toArrayType();
 		}
 
-		var ret = pctx.getSymbolTable().register(name, new CSymbolTableEntry(type, false));
+		var table = pctx.getSymbolTable();
+		var ret = table.register(name, type, size, false);
 		if (ret != null) {
 			pctx.fatalError(ident.toExplainString() + " Identifier \"" + name + "\" is already declared");
 		}
+		entry = table.search(name);
 	}
 
 	@Override
@@ -93,12 +96,16 @@ class DeclItem extends CParseRule {
 
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
-		PrintStream o = pctx.getIOContext().getOutStream();
-		o.println(name + ":");
-		if (type.isArray()) {
-			o.println("\t.BLKW\t" + size + "\t; IntDecl");
+		if (entry.isGlobal()) {
+			PrintStream o = pctx.getIOContext().getOutStream();
+			o.println(name + ":");
+			if (type.isArray()) {
+				o.println("\t.BLKW\t" + entry.getSize() + "\t; IntDecl");
+			} else {
+				o.println("\t.WORD\t0\t; IntDecl");
+			}
 		} else {
-			o.println("\t.WORD\t0\t; IntDecl");
+			// nothing to do for local variables
 		}
 	}
 }

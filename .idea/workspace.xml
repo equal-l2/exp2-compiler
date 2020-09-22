@@ -27,9 +27,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ops/ConditionOps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/ops/ConditionOps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTableEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/ConstDecl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/ConstDecl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/IntDecl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/IntDecl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,9 +93,9 @@
       <recent name="lang.c.parse" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lang.c.parse" />
       <recent name="lang.c.parse.cond" />
       <recent name="lang.c.parse.stmt" />
-      <recent name="lang.c.parse" />
       <recent name="lang.c" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -134,6 +139,7 @@
       <workItem from="1599899924356" duration="4554000" />
       <workItem from="1600153504592" duration="13732000" />
       <workItem from="1600593192081" duration="7033000" />
+      <workItem from="1600763814940" duration="7157000" />
     </task>
     <servers />
   </component>
@@ -154,18 +160,18 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1600210940180">
+    <state x="370" y="161" width="1000" height="629" key="#Inspections" timestamp="1600765005933">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1600210940180" />
+    <state x="370" y="161" width="1000" height="629" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1600765005933" />
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599903721537">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599903721537" />
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1600602638012">
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1600764716395">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1600602638012" />
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1600764716395" />
     <state x="432" y="174" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1599819388194">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -190,30 +196,30 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="204" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599713531220" />
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600599659891">
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1600764975954">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1600599659891" />
+    <state x="478" y="317" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1440.900@0.0.1440.900" timestamp="1600764975954" />
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog" timestamp="1599697423726">
       <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.805@0.23.1440.805" timestamp="1599697423726" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1600414443531">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1600765904522">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600414443531" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1600414443531">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600765904522" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1600765904521">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600414443531" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1600414443530">
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600765904521" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1600765904521">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600414443530" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1600414443531">
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600765904521" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1600765904522">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600414443531" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600765904522" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1599615587224">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

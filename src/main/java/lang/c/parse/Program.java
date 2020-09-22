@@ -6,18 +6,18 @@ import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CTokenizer;
 import lang.c.parse.decl.Declaration;
-import lang.c.parse.stmt.Statement;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class Program extends CParseRule {
-	// program ::= { declaration } { statement } EOF
+	// program ::= { declaration } { declBlock } EOF
+
 	private final ArrayList<Declaration> decls = new ArrayList<>();
-	private final ArrayList<Statement> stmts = new ArrayList<>();
+	private final ArrayList<DeclBlock> blocks = new ArrayList<>();
 
 	public static boolean isFirst(CToken tk) {
-		return Declaration.isFirst(tk) || Statement.isFirst(tk);
+		return Declaration.isFirst(tk) || DeclBlock.isFirst(tk);
 	}
 
 	@Override
@@ -32,10 +32,10 @@ public class Program extends CParseRule {
 			tk = tknz.getCurrentToken(pctx);
 		}
 
-		while (Statement.isFirst(tk)) {
-			var stmt = new Statement();
-			stmt.parse(pctx);
-			stmts.add(stmt);
+		while (DeclBlock.isFirst(tk)) {
+			var dBlock = new DeclBlock();
+			dBlock.parse(pctx);
+			blocks.add(dBlock);
 			tk = tknz.getCurrentToken(pctx);
 		}
 
@@ -50,8 +50,8 @@ public class Program extends CParseRule {
 			decl.semanticCheck(pctx);
 		}
 
-		for (var stmt : stmts) {
-			stmt.semanticCheck(pctx);
+		for (var block : blocks) {
+			block.semanticCheck(pctx);
 		}
 	}
 
@@ -66,11 +66,11 @@ public class Program extends CParseRule {
 		o.println("\tJMP\t__START\t; Program: 最初の実行文へ");
 		o.println("__START:");
 		o.println("\tMOV\t#0x1000, R6\t; Program: 計算用スタック初期化");
-		for (var stmt : stmts) {
-			stmt.codeGen(pctx);
+		o.println("\tMOV\t#R6, R4\t; Program: フレームポインタ初期化");
+		for (var block : blocks) {
+			block.codeGen(pctx);
 		}
-		// TODO: when chained assign is supported, pop stack for each stmt
-		o.println("\tMOV\t-(R6), R0\t; Program: 計算結果確認用");
+		//o.println("\tMOV\t-(R6), R0\t; Program: 計算結果確認用");
 		o.println("\tHLT\t\t\t; Program:");
 		o.println("\t.END\t\t\t; Program:");
 		o.println(";;; program completes");
