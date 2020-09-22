@@ -98,6 +98,7 @@ class ConstItem extends CParseRule {
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
-		o.println(name + ":\t.WORD\t" + value + "\t; ConstDecl");
+		o.println(name + ":");
+		o.println("\t.WORD\t" + value + "\t; ConstDecl");
 	}
 }

@@ -58,14 +58,12 @@ public class Variable extends CParseRule {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; variable starts");
 		ident.codeGen(pctx);
+		o.println("\tMOV\t-(R6), R0\t; Identのアドレスをポップ");
 		if (array != null) {
 			array.codeGen(pctx);
-			o.println("\tMOV\t-(R6), R0\t; Arrayのexprの値をスタックへ");
-		} else {
-			o.println("\tMOV\t#0, R0\t; ");
+			o.println("\tMOV\t-(R6), R1\t; Arrayのexprの値をスタックへ");
+			o.println("\tADD\tR1, R0   \t; Variableのアドレス値を計算");
 		}
-		o.println("\tMOV\t-(R6), R1\t; Identのアドレスをポップ");
-		o.println("\tADD\tR1, R0   \t; Variableのアドレス値を計算");
 		o.println("\tMOV\tR0, (R6)+\t; 計算したアドレスをスタックへ");
 		o.println(";;; variable completes");
 	}

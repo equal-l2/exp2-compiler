@@ -36,8 +36,8 @@ public abstract class ConditionOps extends BinaryOps<Expression> {
 	@Override
 	protected void emitBiOpAsm(CParseContext pctx) {
 		PrintStream o = pctx.getIOContext().getOutStream();
-		o.println("\tMOV\t-(R6), R0\t; ConditionOps");
 		o.println("\tMOV\t-(R6), R1\t; ConditionOps");
+		o.println("\tMOV\t-(R6), R0\t; ConditionOps");
 		emitComparison(pctx);
 	}
 }

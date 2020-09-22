@@ -38,7 +38,7 @@ public class PlusFactor extends UnaryOps<UnsignedFactor> {
 	@Override
 	protected String getElementName() {
 		// no-op as this overrides codeGen
-		return null;
+		return "";
 	}
 
 	@Override

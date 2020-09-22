@@ -116,6 +116,8 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						case '<' -> State.LESS;
 						case '>' -> State.GREAT;
 						case '!' -> State.NEGATE;
+						case '{' -> State.LCUR;
+						case '}' -> State.RCUR;
 						default -> {
 							if (ch >= '1' && ch <= '9') {
 								yield State.DEC;
@@ -186,6 +188,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case RBRA:
 					tk = new CToken(CToken.TK_RBRA, lineNo, startCol, "]");
+					accept = true;
+					break;
+				case LCUR:
+					tk = new CToken(CToken.TK_LCUR, lineNo, startCol, "{");
+					accept = true;
+					break;
+				case RCUR:
+					tk = new CToken(CToken.TK_RCUR, lineNo, startCol, "}");
 					accept = true;
 					break;
 				case EQUAL:
@@ -398,5 +408,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		LESS,
 		GREAT,
 		NEGATE,
+		LCUR,
+		RCUR,
 	}
 }

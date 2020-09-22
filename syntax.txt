@@ -1,19 +1,40 @@
-program       ::= expression EOF
+program ::= { declaration } { statement } EOF
+
+declaration ::= intDecl | constDecl
+
+intDecl ::= INT declItem { COMMA declItem } SEMI
+declItem ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
+
+constDecl ::= CONST INT constItem { COMMA constItem } SEMI
+constItem ::= [ MULT ] IDENT ASSIGN [ AMP ] NUM
+
+statement ::= statementAssign | statementIf | statementWhile | statementInput | statementOutput
+statementAssign ::= primary ASSIGN expression SEMI
+statementIf ::= IF LPAR condition RPAR LCUR { statement } RCUR [ else LPAR { statement } RPAR ]
+statementWhile ::= WHILE LPAR condition RPAR LCUR { statement } RCUR
+statementInput ::= INPUT primary SEMI
+statementOutput ::= OUTPUT expression SEMI
+
 expression    ::= term { expressionAdd | expressionSub }
 expressionAdd ::= PLUS term
 expressionSub ::= MINUS term
+
 term ::= factor { termMult | termDiv }
 termMult ::= MULT factor
 termDiv ::= DIV factor
+
 factor ::= plusFactor | minusFactor | unsignedFactor
 plusFactor ::= PLUS unsignedFactor
 minusFactor ::= MINUS unsignedFactor
 unsignedFactor ::= factorAmp | number | LPAR expression RPAR | addressToValue
 addressToValue ::= primary
 factorAmp ::= AMP (number | variable)
-number ::= NUM
+
 primary ::= primaryMult | variable
 primaryMult ::= MULT variable
+
 variable ::= ident [ array ]
 array ::= LBRA expression RBRA
+
+number ::= NUM
 ident ::= IDENT
