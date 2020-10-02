@@ -32,13 +32,12 @@ public class PlusFactor extends UnaryOps<UnsignedFactor> {
 
 	@Override
 	protected void emitUnary(CParseContext pctx) {
-		// no-op as this overrides codeGen
+		System.err.println("ICE: this should not be called");
 	}
 
 	@Override
 	protected String getElementName() {
-		// no-op as this overrides codeGen
-		return "";
+		return "plusFactor";
 	}
 
 	@Override

@@ -38,9 +38,10 @@ public class TermMult extends BinaryOps<Factor> {
 
 	@Override
 	protected void emitBiOpAsm(CParseContext pctx) {
-		// MULにはスタックに載っている値を使って計算してもらう
-		// 結果もスタックに載せてもらう
-		pctx.getIOContext().getOutStream().println("\tJSR\tMUL\t;");
+		// MULはスタックに載っている値を使って計算し、結果をR0で返す
+		pctx.getIOContext().getOutStream().println("\tJSR\tMUL\t; termMul: 計算サブルーチンを呼ぶ");
+		pctx.getIOContext().getOutStream().println("\tSUB\t#2, R6\t; termMul: スタックに載った引数を片付ける");
+		pctx.getIOContext().getOutStream().println("\tMOV\tR0, (R6)+\t; termMul: スタックに結果を載せる");
 	}
 
 	@Override

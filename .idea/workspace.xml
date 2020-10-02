@@ -27,14 +27,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CSymbolTableEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/ConstDecl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/ConstDecl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/IntDecl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/decl/IntDecl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,16 +90,30 @@
       <recent name="lang.c.parse" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lang.c.tester" />
+      <recent name="lang.c" />
       <recent name="lang.c.parse" />
       <recent name="lang.c.parse.cond" />
       <recent name="lang.c.parse.stmt" />
-      <recent name="lang.c" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/lang/c/parse/decl" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.CondTest">
+    <configuration name="CondTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lang.c.tester.CondTest" />
+      <module name="exp2-compiler.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lang.c.tester.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="exp2-compiler [MiniCompiler TestCToken CondTest]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -124,6 +135,11 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CondTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -139,7 +155,9 @@
       <workItem from="1599899924356" duration="4554000" />
       <workItem from="1600153504592" duration="13732000" />
       <workItem from="1600593192081" duration="7033000" />
-      <workItem from="1600763814940" duration="7157000" />
+      <workItem from="1600763814940" duration="7832000" />
+      <workItem from="1600921865773" duration="1630000" />
+      <workItem from="1601620085731" duration="1692000" />
     </task>
     <servers />
   </component>
@@ -168,10 +186,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1599903721537" />
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1600764716395">
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser" timestamp="1600922378289">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1600764716395" />
+    <state x="533" y="163" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1600922378289" />
     <state x="432" y="174" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1599819388194">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -204,22 +222,22 @@
       <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.805@0.23.1440.805" timestamp="1599697423726" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1600765904522">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1601620153082">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1600765904522" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1600765904521">
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1601620153082" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1601620153080">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1600765904521" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1600765904521">
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1601620153080" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1601620153079">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1600765904521" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1600765904522">
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1601620153079" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1601620153081">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1600765904522" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1601620153081" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1599615587224">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

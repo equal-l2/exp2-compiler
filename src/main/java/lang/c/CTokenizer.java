@@ -83,7 +83,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		State state = State.INIT;
 		boolean accept = false;
 		while (!accept) {
-			System.err.println("Current State : " + state);
+			//System.err.println("Current State : " + state);
 			switch (state) {
 				case INIT:
 					ch = readChar();
@@ -375,7 +375,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 			}
 
 		}
-		System.err.println("ACCEPTED " + tk.toExplainString());
+		//System.err.println("ACCEPTED " + tk.toExplainString());
 		return tk;
 	}
 
