@@ -65,13 +65,15 @@ public class Variable extends CParseRule {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; variable starts");
 		ident.codeGen(pctx);
-		o.println("\tMOV\t-(R6), R0\t; Identのアドレスをポップ");
 		if (array != null) {
 			array.codeGen(pctx);
 			o.println("\tMOV\t-(R6), R1\t; Arrayのexprの値をスタックへ");
+			o.println("\tMOV\t-(R6), R0\t; Identのアドレスをポップ");
 			o.println("\tADD\tR1, R0   \t; Variableのアドレス値を計算");
+			o.println("\tMOV\tR0, (R6)+\t; 計算したアドレスをスタックへ");
+		} else {
+			o.println("\t\t\t\t; Identのアドレスがスタックに載っているので何もしない");
 		}
-		o.println("\tMOV\tR0, (R6)+\t; 計算したアドレスをスタックへ");
 		o.println(";;; variable completes");
 	}
 }

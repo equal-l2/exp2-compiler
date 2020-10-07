@@ -43,9 +43,9 @@ public class Ident extends CParseRule {
 			o.println("\tMOV\t#" + name + ", (R6)+\t; Ident: 大域変数'" + name + "'のアドレスをスタックへ");
 		} else {
 			// assume R4 is frame ptr
-			o.println("\tMOV\tR4, R3\t; ConstDecl: スタックポインタのアドレスをR3へ");
-			o.println("\tMOV\t#" + entry.getOffset() + ", R3\t; ConstDecl: 局所変数'" + name + "'のオフセットを加算");
-			o.println("\tMOV\tR3, (R6)+\t; ConstDecl: 局所変数'" + name + "'のアドレスをスタックへ");
+			o.println("\tMOV\tR4, R0\t; Ident: フレームポインタをR0へ");
+			o.println("\tADD\t#" + entry.getOffset() + ", R0\t; Ident: 局所変数'" + name + "'のオフセットを加算");
+			o.println("\tMOV\tR0, (R6)+\t; Ident: 局所変数'" + name + "'のアドレスをスタックへ");
 		}
 		o.println(";;; ident completes");
 	}

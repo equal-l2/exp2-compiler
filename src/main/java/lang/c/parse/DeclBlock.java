@@ -64,7 +64,7 @@ public class DeclBlock extends CParseRule {
 		PrintStream o = pctx.getIOContext().getOutStream();
 		o.println(";;; declBlock starts");
 		if (offset != 0) {
-			o.println("\tADD\t#" + offset + ", R4\t; DeclBlock: 局所変数領域を確保");
+			o.println("\tADD\t#" + offset + ", R6\t; DeclBlock: 局所変数領域を確保");
 		}
 		for (var decl : decls) {
 			decl.codeGen(pctx);
@@ -73,7 +73,7 @@ public class DeclBlock extends CParseRule {
 			stmt.codeGen(pctx);
 		}
 		if (offset != 0) {
-			o.println("\tSUB\t#" + offset + ", R4\t; ConstDecl: 局所変数領域を開放");
+			o.println("\tSUB\t#" + offset + ", R6\t; ConstDecl: 局所変数領域を開放");
 		}
 		o.println(";;; declBlock completes");
 	}

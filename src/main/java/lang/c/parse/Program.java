@@ -66,7 +66,7 @@ public class Program extends CParseRule {
 		o.println("\tJMP\t__START\t; Program: 最初の実行文へ");
 		o.println("__START:");
 		o.println("\tMOV\t#0x1000, R6\t; Program: 計算用スタック初期化");
-		o.println("\tMOV\t#R6, R4\t; Program: フレームポインタ初期化");
+		o.println("\tMOV\tR6, R4\t; Program: フレームポインタ初期化");
 		for (var block : blocks) {
 			block.codeGen(pctx);
 		}
