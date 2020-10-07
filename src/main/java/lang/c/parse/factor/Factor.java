@@ -27,7 +27,7 @@ public class Factor extends CParseRule {
 		} else if (UnsignedFactor.isFirst(tk)) {
 			factor = new UnsignedFactor();
 		} else {
-			pctx.fatalError(tk.toExplainString() + "expected plusFactor | minusFactor | unsignedFactor");
+			pctx.fatalError(tk.toExplainString() + " expected plusFactor | minusFactor | unsignedFactor");
 		}
 		factor.parse(pctx);
 	}

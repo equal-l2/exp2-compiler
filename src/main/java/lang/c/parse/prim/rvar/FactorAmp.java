@@ -16,9 +16,9 @@ public class FactorAmp extends CParseRule {
 			factorAmp ::= AMP (number | primary)
 		だが、primaryの中身を見るのは面倒だし、この文法でもLL(1)のはずなので
 		何か困るまではこの形で行く
-
-		つぶやき: 教科書の意図としては、variableがlvalueで、primaryがrvalueなのかな……
 	*/
+
+	private CToken op;
 	private CParseRule factorAmp;
 
 	public static boolean isFirst(CToken tk) {
@@ -27,13 +27,15 @@ public class FactorAmp extends CParseRule {
 
 	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
-		CToken tk = pctx.getTokenizer().getNextToken(pctx);
+		var tknz = pctx.getTokenizer();
+		op = tknz.getCurrentToken(pctx);
+		CToken tk = tknz.getNextToken(pctx);
 		if (Number.isFirst(tk)) {
 			factorAmp = new Number();
 		} else if (Variable.isFirst(tk)) {
 			factorAmp = new Variable();
 		} else {
-			pctx.fatalError(tk.toExplainString() + "&の後ろはNumberかVariableです");
+			pctx.fatalError(tk.toExplainString() + " &の後ろはNumberかVariableです");
 		}
 		factorAmp.parse(pctx);
 	}
@@ -43,7 +45,9 @@ public class FactorAmp extends CParseRule {
 		factorAmp.semanticCheck(pctx);
 		CType ty = factorAmp.getCType();
 		if (!ty.isCType(CType.T_int)) {
-			pctx.fatalError("cannot take the address of " + ty);
+			pctx.fatalError(
+					op.toExplainString() + " cannot take the address of type '" + ty + "'",
+					"only address of 'int' type variable is available");
 		}
 		setCType(CType.getCType(CType.T_pint));
 		setConstant(true); // factorAmpはrvalue

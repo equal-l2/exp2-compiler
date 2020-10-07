@@ -38,10 +38,10 @@ public class StatementAssign extends CParseRule {
 		prim.semanticCheck(pctx);
 		expr.semanticCheck(pctx);
 		if (!prim.getCType().isCType(expr.getCType())) {
-			pctx.fatalError(eq.toExplainString() + "cannot assign " + expr.getCType() + " to " + prim.getCType());
+			pctx.fatalError(eq.toExplainString() + " cannot assign " + expr.getCType() + " to " + prim.getCType());
 		}
 		if (prim.isConstant()) {
-			pctx.fatalError("lhs is const");
+			pctx.fatalError(eq.toExplainString() + " lhs is const");
 		}
 	}
 

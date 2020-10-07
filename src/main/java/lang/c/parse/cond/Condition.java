@@ -42,14 +42,14 @@ public class Condition extends CParseRule {
 			} else if (ConditionNE.isFirst(tk)) {
 				conditionOp = new ConditionNE(expr);
 			} else {
-				pctx.fatalError(tk.toExplainString() + "unexpected operator");
+				pctx.fatalError(tk.toExplainString() + " unexpected operator");
 			}
 		} else if (TrueLiteral.isFirst(tk)) {
 			conditionOp = new TrueLiteral();
 		} else if (FalseLiteral.isFirst(tk)) {
 			conditionOp = new FalseLiteral();
 		} else {
-			pctx.fatalError(tk.toExplainString() + "expected conditionOp");
+			pctx.fatalError(tk.toExplainString() + " expected conditionOp");
 		}
 
 		conditionOp.parse(pctx);

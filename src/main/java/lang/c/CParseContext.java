@@ -30,7 +30,7 @@ public class CParseContext extends ParseContext {
 	public CToken expect(Predicate<CToken> predicate, String err) throws FatalErrorException {
 		CToken tk = getTokenizer().getCurrentToken(this);
 		if (!predicate.test(tk)) {
-			fatalError(tk.toExplainString() + err);
+			fatalError(tk.toExplainString() + " " + err);
 		}
 		return tk;
 	}

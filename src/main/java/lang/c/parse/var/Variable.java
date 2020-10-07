@@ -34,19 +34,26 @@ public class Variable extends CParseRule {
 	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		ident.semanticCheck(pctx);
+		CToken tk = ident.getToken();
 		if (array != null) {
 			array.semanticCheck(pctx);
 			CType ty = ident.getCType();
 			if (!ty.isArray()) {
 				// NOTE: 要件によりポインタはindexできないようにしてある
-				pctx.fatalError("cannot index type " + ty);
+				pctx.fatalError(
+						tk.toExplainString() + " expected array type, got " + ident,
+						"non-array type variable cannot be indexed"
+				);
 			}
 			setCType(ty.deref());
 		} else {
 			CType ty = ident.getCType();
 			if (!(ty.isCType(CType.T_int) || ty.isCType(CType.T_pint))) {
 				// NOTE: 要件により配列型変数はindexされた形でしか出現できない
-				pctx.fatalError("expected scalar types, found " + ty);
+				pctx.fatalError(
+						tk.toExplainString() + " expected scalar types, got " + ident,
+						"bare array type variable is not allowed"
+				);
 			}
 			setCType(ty);
 		}

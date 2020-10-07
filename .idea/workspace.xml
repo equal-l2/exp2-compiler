@@ -28,10 +28,20 @@
   <component name="ChangeListManager">
     <list default="true" id="c9996e23-5c52-48b2-bec4-53f1c2aeb606" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/PlusFactor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermDiv.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/term/TermMult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/ParseContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CParseContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CParseContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/CondTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/CondTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/MiniCompiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/MiniCompiler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/DeclBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/DeclBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/Condition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/cond/Condition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/factor/Factor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/Primary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/Primary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/rvar/FactorAmp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/prim/rvar/FactorAmp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementAssign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/stmt/StatementAssign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Array.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Ident.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lang/c/parse/var/Variable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +92,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/lang/c/parse/decl" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
@@ -158,6 +168,7 @@
       <workItem from="1600763814940" duration="7832000" />
       <workItem from="1600921865773" duration="1630000" />
       <workItem from="1601620085731" duration="1692000" />
+      <workItem from="1602058640130" duration="6015000" />
     </task>
     <servers />
   </component>
@@ -222,41 +233,48 @@
       <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="100" y="100" width="1240" height="700" key="DiffContextDialog/0.23.1440.805@0.23.1440.805" timestamp="1599697423726" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1601620153082">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1601626448803">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1601620153082" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1601620153080">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.23.1440.805@0.23.1440.805" timestamp="1601626448803" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center" timestamp="1601626448803">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1601620153080" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1601620153079">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="245" key="GridCell.Tab.0.center/0.23.1440.805@0.23.1440.805" timestamp="1601626448803" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left" timestamp="1601626448803">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1601620153079" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1601620153081">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="245" key="GridCell.Tab.0.left/0.23.1440.805@0.23.1440.805" timestamp="1601626448803" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right" timestamp="1601626448803">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1601620153081" />
-    <state x="221" y="89" key="SettingsEditor" timestamp="1599615587224">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="245" key="GridCell.Tab.0.right/0.23.1440.805@0.23.1440.805" timestamp="1601626448803" />
+    <state x="221" y="103" key="SettingsEditor" timestamp="1602060169583">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1599615587224" />
+    <state x="221" y="103" key="SettingsEditor/0.23.1440.805@0.23.1440.805" timestamp="1602060169583" />
     <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1599453903048">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="417" y="349" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1440.900@0.0.1440.900" timestamp="1599453903048" />
-    <state x="421" y="82" width="598" height="735" key="find.popup" timestamp="1600154410006">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="421" y="96" width="598" height="658" key="find.popup" timestamp="1602058905103">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="421" y="82" width="598" height="735" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1600154410006" />
+    <state x="421" y="96" width="598" height="658" key="find.popup/0.23.1440.805@0.23.1440.805" timestamp="1602058905103" />
     <state x="385" y="210" key="run.anything.popup" timestamp="1599867157028">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1599867157028" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1600595745092">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="385" y="198" width="670" height="605" key="search.everywhere.popup" timestamp="1602060732378">
+      <screen x="0" y="23" width="1440" height="805" />
     </state>
     <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1600595745092" />
+    <state x="385" y="198" width="670" height="605" key="search.everywhere.popup/0.23.1440.805@0.23.1440.805" timestamp="1602060732378" />
   </component>
 </project>

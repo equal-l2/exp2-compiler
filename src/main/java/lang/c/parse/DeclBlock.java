@@ -44,7 +44,7 @@ public class DeclBlock extends CParseRule {
 			tk = tknz.getCurrentToken(pctx);
 		}
 
-		pctx.consume(CToken.TK_RCUR, "'}' expected");
+		pctx.consume(CToken.TK_RCUR, "expected '}'");
 		table.exitLocal();
 	}
 

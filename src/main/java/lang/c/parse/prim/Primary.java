@@ -23,7 +23,7 @@ public class Primary extends CParseRule {
 		} else if (Variable.isFirst(tk)) {
 			primary = new Variable();
 		} else {
-			pctx.fatalError(tk.toExplainString() + "expected primaryMult | variable");
+			pctx.fatalError(tk.toExplainString() + " expected primaryMult | variable");
 		}
 		primary.parse(pctx);
 	}

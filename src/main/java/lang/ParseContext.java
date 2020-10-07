@@ -57,7 +57,17 @@ public abstract class ParseContext {
 
 	// 本当に致命的な場合は例外を投げる
 	public void fatalError(final String s) throws FatalErrorException {
-		error(s);
+		fatalError(s, null);
+	}
+
+	public void fatalError(final String err, String hint) throws FatalErrorException {
+		var err_colored = "\033[31m" + err + "\033[m";
+		if (hint != null) {
+			var hint_colored = "\033[33m(hint: " + hint + ")\033[m";
+			error(err_colored + '\n' + hint_colored);
+		} else {
+			error(err_colored);
+		}
 		throw new FatalErrorException();
 	}
 

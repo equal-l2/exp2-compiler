@@ -11,7 +11,7 @@ import java.io.PrintStream;
 public class Ident extends CParseRule {
 	// ident ::= IDENT
 
-	private String name;
+	private CToken token;
 	private CSymbolTableEntry entry;
 
 	public static boolean isFirst(CToken tk) {
@@ -20,11 +20,11 @@ public class Ident extends CParseRule {
 
 	@Override
 	public void parse(CParseContext pctx) throws FatalErrorException {
-		CToken tk = pctx.take();
-		name = tk.getText();
+		token = pctx.take();
+		var name = token.getText();
 		entry = pctx.getSymbolTable().search(name);
 		if (entry == null) {
-			pctx.fatalError(tk.toExplainString() + "Identifier " + name + " is not declared");
+			pctx.fatalError(token.toExplainString() + "Identifier " + name + " is not declared");
 		}
 	}
 
@@ -37,6 +37,8 @@ public class Ident extends CParseRule {
 	@Override
 	public void codeGen(CParseContext pctx) throws FatalErrorException {
 		PrintStream o = pctx.getIOContext().getOutStream();
+		var name = token.getText();
+		o.println(";;; ident starts");
 		if (entry.isGlobal()) {
 			o.println("\tMOV\t#" + name + ", (R6)+\t; Ident: 大域変数'" + name + "'のアドレスをスタックへ");
 		} else {
@@ -45,5 +47,15 @@ public class Ident extends CParseRule {
 			o.println("\tMOV\t#" + entry.getOffset() + ", R3\t; ConstDecl: 局所変数'" + name + "'のオフセットを加算");
 			o.println("\tMOV\tR3, (R6)+\t; ConstDecl: 局所変数'" + name + "'のアドレスをスタックへ");
 		}
+		o.println(";;; ident completes");
+	}
+
+	public CToken getToken() {
+		return token;
+	}
+
+	@Override
+	public String toString() {
+		return "'" + token.getText() + "' (type '" + getCType() + "')";
 	}
 }
