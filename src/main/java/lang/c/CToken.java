@@ -54,6 +54,21 @@ public class CToken extends SimpleToken {
 			case TK_CONST -> "CONST";
 			case TK_INT -> "INT";
 			case TK_COMMA -> "COMMA";
+			case TK_EQ -> "EQ";
+			case TK_NE -> "NE";
+			case TK_LT -> "LT";
+			case TK_LE -> "LE";
+			case TK_GT -> "GT";
+			case TK_GE -> "GE";
+			case TK_TRUE -> "TRUE";
+			case TK_FALSE -> "FALSE";
+			case TK_LCUR -> "LCUR";
+			case TK_RCUR -> "RCUR";
+			case TK_INPUT -> "INPUT";
+			case TK_OUTPUT -> "OUTPUT";
+			case TK_WHILE -> "WHILE";
+			case TK_IF -> "IF";
+			case TK_ELSE -> "ELSE";
 			default -> super.getTypeString();
 		};
 	}

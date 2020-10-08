@@ -261,7 +261,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						tk = new CToken(CToken.TK_GE, lineNo, startCol, "!=");
 						accept = true;
 					} else {
-						text.append(ch);
+						backChar(ch);
 						state = State.ILL;
 					}
 					break;

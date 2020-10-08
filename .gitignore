@@ -9,3 +9,5 @@ build
 TestCases
 *.c
 *.s
+
+.idea/workspace.xml

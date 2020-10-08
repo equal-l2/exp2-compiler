@@ -63,17 +63,13 @@ public class StatementIf extends CParseRule {
 		cond.codeGen(pctx);
 		o.println("\tMOV\t-(R6), R0\t; pop cond result and set Z");
 
-		if (hasElse) {
-			o.println("\tBRZ\t" + "ELSE" + seq + "\t; ");
-		} else {
-			o.println("\tBRZ\t" + "END" + seq + "\t; ");
-		}
+		o.println("\tBRZ\t" + "ELSE" + seq + "\t; ");
 
 		body.codeGen(pctx);
 		o.println("\tJMP\t" + "END" + seq + "\t; ");
 
+		o.println("ELSE" + seq + ":");
 		if (elseBody != null) {
-			o.println("ELSE" + seq + ":");
 			elseBody.codeGen(pctx);
 		}
 
