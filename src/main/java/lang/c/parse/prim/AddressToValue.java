@@ -8,7 +8,7 @@ import lang.c.CToken;
 import java.io.PrintStream;
 
 public class AddressToValue extends CParseRule {
-	// addressToValue ::= Primary
+	// addressToValue ::= primary
 	private Primary prim;
 
 	public static boolean isFirst(CToken tk) {

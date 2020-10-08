@@ -11,7 +11,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class DeclBlock extends CParseRule {
-	// program ::= LCUR { declaration } { statement } RCUR
+	// declBlock ::= LCUR { declaration } { statement } RCUR
 
 	private final ArrayList<Declaration> decls = new ArrayList<>();
 	private final ArrayList<Statement> stmts = new ArrayList<>();

@@ -57,6 +57,7 @@ class ConstItem extends CParseRule {
 	private String name;
 	private String value;
 	private CSymbolTableEntry entry;
+	private CToken eq;
 
 	public static boolean isFirst(CToken tk) {
 		int ty = tk.getType();
@@ -74,7 +75,7 @@ class ConstItem extends CParseRule {
 		CToken ident = pctx.consume(CToken.TK_IDENT, "expected IDENT");
 		name = ident.getText();
 
-		pctx.consume(CToken.TK_ASSIGN, "expected '='");
+		eq = pctx.consume(CToken.TK_ASSIGN, "expected '='");
 
 		if (tknz.getCurrentToken(pctx).getType() == CToken.TK_AMP) {
 			rhs_type = CType.getCType(CType.T_pint);
@@ -96,7 +97,7 @@ class ConstItem extends CParseRule {
 	@Override
 	public void semanticCheck(CParseContext pctx) throws FatalErrorException {
 		if (!lhs_type.equals(rhs_type)) {
-			pctx.fatalError("cannot assign " + rhs_type + " to " + lhs_type);
+			pctx.fatalError(eq.toExplainString() + " cannot initialize '" + name + "' (type '" + lhs_type + "') with type '" + rhs_type + "'");
 		}
 	}
 
