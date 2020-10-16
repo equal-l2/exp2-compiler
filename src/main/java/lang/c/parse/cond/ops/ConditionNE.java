@@ -21,10 +21,10 @@ public class ConditionNE extends ConditionOps {
 		var label = "NE" + pctx.getSeqId();
 		o.println("\tCLR\tR2\t; ConditionNE: move false to R2");
 		o.println("\tCMP\tR0, R1\t; ConditionNE: let d = R1-R0");
-		o.println("\tJEZ\t" + label + "\t; ConditionNE: R0 != R1 -> d != 0 -> !Z");
+		o.println("\tBRZ\t" + label + "\t; ConditionNE: R0 != R1 -> d != 0 -> !Z");
 		o.println("\tMOV\t#1, R2\t; ConditionNE: move true to R2");
 		o.println(label + ":\t\t; ConditionNE");
-		o.println("\tMOV\tR2, (R6)+\t; ConditionEQ: push the result to the stack");
+		o.println("\tMOV\tR2, (R6)+\t; ConditionNE: push the result to the stack");
 	}
 
 	@Override

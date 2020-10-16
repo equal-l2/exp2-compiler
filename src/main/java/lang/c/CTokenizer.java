@@ -258,7 +258,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				case NEGATE:
 					ch = readChar();
 					if (ch == '=') {
-						tk = new CToken(CToken.TK_GE, lineNo, startCol, "!=");
+						tk = new CToken(CToken.TK_NE, lineNo, startCol, "!=");
 						accept = true;
 					} else {
 						backChar(ch);
