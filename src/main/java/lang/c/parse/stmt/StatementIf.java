@@ -66,14 +66,14 @@ public class StatementIf extends CParseRule {
 		o.println("\tBRZ\t" + "ELSE" + seq + "\t; ");
 
 		body.codeGen(pctx);
-		o.println("\tJMP\t" + "END" + seq + "\t; ");
+		o.println("\tJMP\t" + "ENDIF" + seq + "\t; ");
 
 		o.println("ELSE" + seq + ":");
 		if (elseBody != null) {
 			elseBody.codeGen(pctx);
 		}
 
-		o.println("END" + seq + ":");
+		o.println("ENDIF" + seq + ":");
 		o.println(";;; statementIf completes");
 	}
 }

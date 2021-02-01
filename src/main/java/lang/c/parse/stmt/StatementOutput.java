@@ -37,9 +37,9 @@ public class StatementOutput extends CParseRule {
 		var o = pctx.getIOContext().getOutStream();
 		o.println(";;; statementOutput starts");
 		expr.codeGen(pctx);
-		o.println("\tMOV\t-(R6), R0\t;");
-		o.println("\tMOV\t#0xFFE0, R1\t;");
-		o.println("\tMOV\tR0, (R1)\t;");
+		o.println("\tMOV\t-(R6), R0\t; store value of expr to R0");
+		o.println("\tMOV\t#0xFFE0, R1\t; store MMIO address to R1");
+		o.println("\tMOV\tR0, (R1)\t; output value");
 		o.println(";;; statementOutput completes");
 	}
 }

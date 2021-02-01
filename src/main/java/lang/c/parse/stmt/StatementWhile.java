@@ -48,16 +48,16 @@ public class StatementWhile extends CParseRule {
 
 		o.println(";;; statementWhile starts");
 
-		o.println("BEGIN" + seq + ":");
+		o.println("BEGIN_WHILE" + seq + ":");
 		cond.codeGen(pctx);
 		o.println("\tMOV\t-(R6), R0\t; pop cond result and set Z");
 
-		o.println("\tBRZ\t" + "END" + seq + "\t; ");
+		o.println("\tBRZ\t" + "END_WHILE" + seq + "\t; ");
 
 		body.codeGen(pctx);
-		o.println("\tJMP\t" + "BEGIN" + seq + "\t; ");
+		o.println("\tJMP\t" + "BEGIN_WHILE" + seq + "\t; ");
 
-		o.println("END" + seq + ":");
+		o.println("END_WHILE" + seq + ":");
 		o.println(";;; statementWhile completes");
 	}
 }

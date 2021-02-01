@@ -42,9 +42,9 @@ public class StatementInput extends CParseRule {
 		var o = pctx.getIOContext().getOutStream();
 		o.println(";;; statementInput starts");
 		prim.codeGen(pctx);
-		o.println("\tMOV\t#0xFFE0, R0\t;");
-		o.println("\tMOV\t-(R6), R1\t;");
-		o.println("\tMOV\t(R0), (R1)\t;");
+		o.println("\tMOV\t#0xFFE0, R0\t; store MMIO address to R0");
+		o.println("\tMOV\t-(R6), R1\t; store address to R1");
+		o.println("\tMOV\t(R0), (R1)\t; store input to the address");
 		o.println(";;; statementInput completes");
 	}
 }

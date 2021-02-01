@@ -92,6 +92,10 @@ class ConstItem extends CParseRule {
 			pctx.fatalError(ident.toExplainString() + " Identifier \"" + name + "\" is already declared");
 		}
 		entry = table.search(name);
+
+		// パース段階で左辺・右辺の型は確定するのでこの時点で型エラーを出すこともできるが
+		// 型が違ってもsyntax上は問題なく、semanticの問題だし
+		// statementAssignとのparityも考えてsemanticCheckまでエラーは待たせる
 	}
 
 	@Override
